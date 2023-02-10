@@ -1,7 +1,10 @@
 //controllers
 
 const index = (req, res, next) => {
-    res.render('signup', { title: 'Signup' });
+    res.render('signup', { 
+      title: 'SignUp',
+      message: 'Welcome Back!!!'
+    });
   }
 
 module.exports = {
