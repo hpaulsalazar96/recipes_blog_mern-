@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  hr
+  h4 Listado de recetas
+  hr
+  - let pos=0
+  each recipe in recipes
+    - pos++
+    p
+      b No.:
+      | #{pos}
+    p
+      b Titulo
+      |  #{recipe.title}
+    p
+      b Img
+      |  #{recipe.img}
+    p
+      b Contenido
+      |  #{recipe.content}
+  hr

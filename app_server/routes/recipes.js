@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //controllers imports
-const ctrlRecipe = require('../controllers/recipe')
+const ctrlRecipe = require('../controllers/recipes')
 
 /* GET recipe page. */
 router.get('/', ctrlRecipe.index);
