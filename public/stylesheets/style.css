@@ -1,5 +1,8 @@
 body {
-  padding: 0px;
+  padding-left: 56px;
+  padding-right: 56px;
+  padding-top: 56px;
+  padding-bottom: 56px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -15,6 +18,19 @@ a {
   display: flex;
   align-items: center;
 }
+
 .form-right i {
   font-size: 100px;
+}
+
+footer {
+  position: fixed;
+  height: 56px;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  flex: 1;
 }
