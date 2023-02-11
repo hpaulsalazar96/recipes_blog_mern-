@@ -11,16 +11,16 @@ block content
       - let pos=0
       each recipe in recipes
         - pos++
+        div(class="fakeimg2") #{recipe.img}
         a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes/read') View
+        
         p
+          
           b No.:
           | #{pos}
         p
           b Titulo
           |  #{recipe.title}
-        p
-          b Img
-          |  #{recipe.img}
         p
           b Contenido
           |  #{recipe.content}

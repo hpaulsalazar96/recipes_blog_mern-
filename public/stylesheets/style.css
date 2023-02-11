@@ -41,3 +41,24 @@ footer {
 .content {
   flex: 1;
 }
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  float: right;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.fakeimg2 {
+  background-color: #aaa;
+  width: 220px;
+  height: 220px;
+  padding: 20px;
+  float: inline-start;
+  margin-right: 15px;
+  margin-left: 15px;
+}

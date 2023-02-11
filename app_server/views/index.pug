@@ -4,4 +4,25 @@ block content
   .base_page.bg-light
     .pad_mod
       h1= title
-      p Welcome to #{title}
+      hr
+      - let pos=0
+      each recipe in recipes
+        - pos++
+        div(class="fakeimg2") #{recipe.img}
+        a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes/read') View
+        
+        p
+          
+          b No.:
+          | #{pos}
+        p
+          b Titulo
+          |  #{recipe.title}
+
+        b Related Issues
+        each issue in recipe.related_issues
+          p
+              | &dot;  #{issue.description}
+          p
+        hr
+      hr
