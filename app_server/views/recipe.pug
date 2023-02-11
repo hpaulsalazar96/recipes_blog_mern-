@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .base_page.bg-light
+        .pad_mod
+            h2= title
+
+
+            h3 #{recipe.title}
+            p Author: #{recipe.author}
+            img.rounded.float-right(src=`../../${recipe.img}` alt=`alt:${recipe.img}`)
+            hr
+            b Related Issues:
+            each issue in recipe.related_issues
+                p
+                | &dot;  #{issue.description}
+                p
+            hr
+            b Ingredients:
+            each item in recipe.items
+                p
+                | &dot;  #{item.name}
+                p
+            hr
+            p #{recipe.content}
+            hr
