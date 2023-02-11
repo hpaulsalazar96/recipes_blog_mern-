@@ -1,6 +1,76 @@
 extends layout
 
 block content
-  .base_page.bg-light
-    h1= title
-    p Welcome to #{title}
+  .base-page.bg-light
+    .container
+      .row
+        .col-lg-10.offset-lg-1
+          h3.mb-3 #{title}
+          .bg-white.shadow.rounded
+            .row
+              .col-md-7.pe-0
+                .form-left.h-100.py-5.px-5
+                  form.row.g-4(action='')
+                    .col-12
+                      label
+                        | Username
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder=`${information.username}`)
+                    .col-12
+                      label
+                        | Email
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder=`${information.email}`)
+                    .col-12
+                      label
+                        | New Password
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-lock-fill
+                        input.form-control(type='text' placeholder='Enter New Password')
+                    .col-12
+                      label
+                        | Confirm New Password
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder='Confirm New Password')
+                    .col-12
+                      button.btn.btn-primary.px-4.float-end.mt-2(type='submit') Update
+                    .col-12
+                      button.btn.btn-danger.px-4.float-end.mt-2(type='submit') Delete Account
+              .col-md-5.ps-0.d-none.d-md-block
+                .form-right.h-100.bg-primary.text-white.text-center.pt-5
+                  i.bi.bi-bootstrap
+                  h2.fs-1 #{message}
+                  hr
+                  hr
+                  hr
+                  hr
+                  hr
+                  hr
+                  - let pos=0
+                  h3 Related Problems
+                  hr
+                  each issue in information.issues
+                    - pos++
+                    p
+                      b Issue 
+                        b #{pos}:
+                      |  #{issue.description}
+                    p
+                    hr
+                  hr
+                  hr
+                  hr
+                  hr
+
+          p.text-end.text-secondary.mt-3 A Henry and Ignacio Project
