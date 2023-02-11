@@ -93,8 +93,9 @@ const index = (req, res, next) => {
   }
 
 const recipeCreate = (req, res, next) => {
-    res.render('recipes', { 
-      title: 'Recipes' 
+    res.render('recipes_create_form', { 
+      title: 'Recipes',
+      message: 'Healthy Meal On Comming!!!'
     });
   }
 
@@ -106,22 +107,23 @@ const recipeRead = (req, res, next) => {
   }
 
 const recipeDelete = (req, res, next) => {
-    res.render('recipes', { 
-      title: 'Recipes' 
-    });
-  }
-
-const recipeUpdate = (req, res, next) => {
-    res.render('recipes', { 
+    res.render('recipes_delete', { 
       title: 'Recipes',
       recipes
     });
   }
+
+/*const recipeUpdate = (req, res, next) => {
+    res.render('recipes', { 
+      title: 'Recipes',
+      recipes
+    });
+  }*/
 
 module.exports = {
     index,
     recipeCreate,
     recipeRead,
     recipeDelete,
-    recipeUpdate,
+    //recipeUpdate,
 };

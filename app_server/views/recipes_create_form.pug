@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  .base-page.bg-light
+    .container
+      .row
+        .col-lg-10.offset-lg-1
+          h3.mb-3 #{title}
+          .bg-white.shadow.rounded
+            .row
+              .col-md-7.pe-0
+                .form-left.h-100.py-5.px-5
+                  form.row.g-4(action='')
+                    .col-12
+                      label
+                        | Title
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder='Enter Title')
+                    .col-12
+                      label
+                        | Author
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder='Enter Author')
+                    .col-12
+                      label
+                        | Related Issues
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder='Separated with coma')
+                    .col-12
+                      label
+                        | Description
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-lock-fill
+                        input.form-control(type='text' placeholder='Description')
+                    
+                    .col-12
+                      label
+                        | Ingredients
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        input.form-control(type='text' placeholder='Separated with coma')
+
+                    .col-12
+                      a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes') Save
+              .col-md-5.ps-0.d-none.d-md-block
+                .form-right.h-100.bg-primary.text-white.text-center.pt-5
+                  i.bi.bi-bootstrap
+                  h2.fs-1 #{message}
+          p.text-end.text-secondary.mt-3 A Henry and Ignacio Project

@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .base_page.bg-light
+    .pad_mod
+      h1= title
+      p Welcome to #{title}
+      hr
+      h4 Listado de recetas
+      hr
+      - let pos=0
+      each recipe in recipes
+        - pos++
+        div(class="fakeimg2") #{recipe.img}
+        a.btn.btn-danger.px-4.float-end.mt-4(type='submit' href='/recipes/delete') DELETE
+        
+        p
+          
+          b No.:
+          | #{pos}
+        p
+          b Titulo
+          |  #{recipe.title}
+        p
+          b Contenido
+          |  #{recipe.content}
+        b Related Issues
+        each issue in recipe.related_issues
+          p
+              | &dot;  #{issue.description}
+          p
+        hr
+      hr

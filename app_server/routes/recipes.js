@@ -11,7 +11,7 @@ router.get('/create', ctrlRecipe.recipeCreate);
 
 router.get('/read', ctrlRecipe.recipeRead);
 
-router.get('/update', ctrlRecipe.recipeUpdate);
+//router.get('/update', ctrlRecipe.recipeUpdate);
 
 router.get('/delete', ctrlRecipe.recipeDelete);
 
