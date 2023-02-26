@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // modelo
-require('./app_server/models/db');
+require('./app_api/models/db');
 
 // routes
 const indexRouter = require('./app_server/routes/index');
@@ -15,6 +15,7 @@ const loginRouter = require('./app_server/routes/login');
 const recipeRouter = require('./app_server/routes/recipes');
 const contactRouter = require('./app_server/routes/contact');
 const profileRouter = require('./app_server/routes/profile');
+const apiRouter = require('./app_api/routes/index')
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/login', loginRouter);
 app.use('/recipes', recipeRouter);
 app.use('/contact', contactRouter);
 app.use('/profile', profileRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
