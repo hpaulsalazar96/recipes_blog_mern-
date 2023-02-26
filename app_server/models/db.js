@@ -39,8 +39,12 @@ process.on('SIGINT', ()=>{
     })
 })
 
-const dbURI = 'mongodb://localhost:27017/db_recipes_project';
+let dbURI = 'mongodb://localhost:27017/db_recipes_project';
 mongoose.set('strictQuery', true)
+
+if(process.env.NODE_ENV === 'production'){
+    dbURI = process.env.MONGODB_URI;
+}
 
 // Connect MongoDB at default port 27017.
 mongoose.connect(dbURI, {
