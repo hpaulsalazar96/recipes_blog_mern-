@@ -1,4 +1,5 @@
-
+const mongoose = require('mongoose');
+const recipes = mongoose.model('recipe');
 
 
 const recipeCreate = (req, res) => {
@@ -10,19 +11,50 @@ const recipeCreate = (req, res) => {
 }
 
 const recipeList = (req, res) => {
-    res
-        .status(200)
-        .json({
-            "status": "listed successfully"
-        });
+    recipes
+        .find()
+        .exec((err, recipeObject)=>{
+            if(!recipeObject){
+                console.log(`recetas no encontrados)`);
+                return res
+                    .status(404)
+                    .json({"mensaje" : "recetas no encontrados"})
+            }else if(err){
+                console.log(`usuarios tiene errores)`);
+                return res
+                    .status(404)
+                    .json(err);
+            }
+            res
+                .status(200)
+                .json(recipeObject);
+        })
+    //res
+    //    .status(200)
+    //    .json({
+    //        "status": "listed successfully"
+    //    });
 }
 
 const recipeRead = (req, res) => {
-    res
-        .status(200)
-        .json({
-            "status": "read action successfully"
-        });
+    recipes
+        .findById(req.params.recipeid)
+        .exec((err, recipeObject)=>{
+            if(!recipeObject){
+                console.log(`receta especificado: ${req.params.recipeid} no encontrado)`);
+                return res
+                    .status(404)
+                    .json({"mensaje" : "receta no encontrada"})
+            }else if(err){
+                console.log(`receta especificada: ${req.params.recipeid} tiene errores)`);
+                return res
+                    .status(404)
+                    .json(err);
+            }
+            res
+            .status(200)
+            .json(recipeObject);
+        })
 }
 
 const recipeUpdate = (req, res) => {
