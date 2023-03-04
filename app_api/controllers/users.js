@@ -3,6 +3,24 @@ const users = mongoose.model('user');
 
 
 const userCreate = (req, res) => {
+    users.create({
+        username: req.body.username,
+        email: req.body.email,
+        relatedIssues: {
+            titles: req.body.relatedIssues
+        },
+        password: req.body.password,
+    }, (err, userObject) => {
+        if (err) {
+            res
+                .status(400)
+                .json(err);
+        } else {
+            res
+                .status(201)
+                .json(userObject);
+        }
+    });
     res
         .status(200)
         .json({
@@ -58,6 +76,46 @@ const userRead = (req, res) => {
 }
 
 const userUpdate = (req, res) => {
+    if (!req.params.userid) {
+        return res
+            .status(404)
+            .json({
+                "message": "Ingrese un userid válido"
+            });
+    }
+    users
+        .findById(req.params.userid)
+        .exec((err, userObject) => {
+            if (!userObject) {
+                return res
+                    .status(404)
+                    .json({
+                        "message": "userid no existe"
+                    });
+            } else if (err) {
+                return res
+                    .status(400)
+                    .json(err);
+            }
+            userObject.username = req.body.username;
+            userObject.email = req.body.email;
+            userObject.relatedIssues = [req.body.relatedIssues];
+            userObject.password = req.body.password;
+
+            
+
+            userObject.save((err, users) => {
+                if (err) {
+                    res
+                        .status(404)
+                        .json(err);
+                } else {
+                    res
+                        .status(200)
+                        .json(users);
+                }
+            });
+        });
     res
         .status(200)
         .json({
@@ -66,6 +124,25 @@ const userUpdate = (req, res) => {
 }
 
 const userDelete = (req, res) => {
+    if (req.params.userid) {
+        users
+            .findByIdAndDelete(req.params.userid)
+            .exec((err, userObject) => {
+                if (!userObject) { // findByIdAndDelete no encontró un documento que cumpla con userid
+                    console.log(`User con el userid: ${req.params.userid} no encontrado`);
+                    return res 
+                        .status(404)
+                        .json({"mensaje": "User no encontrado"});
+                } else if (err) {
+                    return res
+                        .status(404)
+                        .json(err);
+                }
+                res
+                    .status(204)
+                    .json(null);
+            });
+    }
     res
         .status(200)
         .json({
