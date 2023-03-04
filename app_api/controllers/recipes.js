@@ -4,16 +4,12 @@ const recipes = mongoose.model('recipe');
 
 const recipeCreate = (req, res) => {
     recipes.create({
-        title: req.body.totle,
+        title: req.body.title,
         author: req.body.author,
         img: req.body.img,
-        relatedIssues: {
-            titles: req.body.relatedIssues
-        },
+        relatedIssues: req.body.relatedIssues,
         description: req.body.description,
-        ingredients: {
-            ingredients: req.body.ingredients,
-        },
+        ingredients: req.body.ingredients,
     }, (err, recipeObject) => {
         if (err) {
             res
@@ -25,11 +21,7 @@ const recipeCreate = (req, res) => {
                 .json(recipeObject);
         }
     });
-    res
-        .status(200)
-        .json({
-            "status": "created successfully"
-        });
+    
 }
 
 const recipeList = (req, res) => {
@@ -104,9 +96,9 @@ const recipeUpdate = (req, res) => {
             recipeObject.title = req.body.title;
             recipeObject.author = req.body.author;
             recipeObject.img = req.body.img;
-            recipeObject.relatedIssues = [req.body.relatedIssues];
+            recipeObject.relatedIssues = req.body.relatedIssues;
             recipeObject.description = req.body.description;
-            recipeObject.ingredients = [req.body.ingredients];
+            recipeObject.ingredients = req.body.ingredients;
             
 
             recipeObject.save((err, recipes) => {
@@ -120,11 +112,6 @@ const recipeUpdate = (req, res) => {
                         .json(recipes);
                 }
             });
-        });
-    res
-        .status(200)
-        .json({
-            "status": "Update action successfully"
         });
 }
 
@@ -148,11 +135,6 @@ const recipeDelete = (req, res) => {
                     .json(null);
             });
     }
-    res
-        .status(200)
-        .json({
-            "status": "Delete action successfully"
-        });
 }
 
 module.exports = {

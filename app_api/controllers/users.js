@@ -6,9 +6,7 @@ const userCreate = (req, res) => {
     users.create({
         username: req.body.username,
         email: req.body.email,
-        relatedIssues: {
-            titles: req.body.relatedIssues
-        },
+        relatedIssues: req.body.relatedIssues,
         password: req.body.password,
     }, (err, userObject) => {
         if (err) {
@@ -21,11 +19,6 @@ const userCreate = (req, res) => {
                 .json(userObject);
         }
     });
-    res
-        .status(200)
-        .json({
-            "status": "created successfully"
-        });
 }
 
 const userList = (req, res) => {
@@ -99,7 +92,7 @@ const userUpdate = (req, res) => {
             }
             userObject.username = req.body.username;
             userObject.email = req.body.email;
-            userObject.relatedIssues = [req.body.relatedIssues];
+            userObject.relatedIssues = req.body.relatedIssues;
             userObject.password = req.body.password;
 
             
@@ -115,11 +108,6 @@ const userUpdate = (req, res) => {
                         .json(users);
                 }
             });
-        });
-    res
-        .status(200)
-        .json({
-            "status": "Update action successfully"
         });
 }
 
@@ -143,11 +131,6 @@ const userDelete = (req, res) => {
                     .json(null);
             });
     }
-    res
-        .status(200)
-        .json({
-            "status": "Delete action successfully"
-        });
 }
 
 module.exports = {
