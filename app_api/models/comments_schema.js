@@ -22,4 +22,4 @@ const comment = new CommentModel({
     score : 15.5,
 })
 
-comment.save() 
+//comment.save() 
