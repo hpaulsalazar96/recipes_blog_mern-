@@ -16,6 +16,10 @@ const usersSchema = new mongoose.Schema({
         type : String,
         require: true
     },
+    superuser : {
+        type : Boolean,
+        require: true
+    },
 })
 
 const UserModel = new mongoose.model('user', usersSchema);
@@ -24,7 +28,8 @@ const user = new UserModel({
     username : "hmendez",
     email: "hmendez@dev.com",
     relatedIssues: ["Hipertension"],
-    password: "nonsecure1"
+    password: "nonsecure1",
+    superuser: true
 })
 
-//user.save()
+user.save()

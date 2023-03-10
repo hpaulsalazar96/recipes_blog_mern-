@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const readLine = require('readline');
 
 require('./users_schema');
-require('./recipes_schema')
+require('./recipes_schema');
+require('./comments_schema');
 
 if(process.platform === 'win32'){
     const rl = readLine.Interface({

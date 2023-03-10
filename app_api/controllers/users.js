@@ -8,6 +8,7 @@ const userCreate = (req, res) => {
         email: req.body.email,
         relatedIssues: req.body.relatedIssues,
         password: req.body.password,
+        superuser: req.body.superuser
     }, (err, userObject) => {
         if (err) {
             res
@@ -94,8 +95,7 @@ const userUpdate = (req, res) => {
             userObject.email = req.body.email;
             userObject.relatedIssues = req.body.relatedIssues;
             userObject.password = req.body.password;
-
-            
+            userObject.superuser = req.body.superuser;            
 
             userObject.save((err, users) => {
                 if (err) {

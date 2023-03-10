@@ -4,6 +4,7 @@ const router = express.Router();
 //controllers imports
 const ctrlUsers = require('../controllers/users')
 const ctrlRecipes = require('../controllers/recipes')
+const ctrlComments = require('../controllers/comments')
 
 router
     .route('/users')
@@ -26,6 +27,17 @@ router
     .get(ctrlRecipes.recipeRead)
     .put(ctrlRecipes.recipeUpdate)
     .delete(ctrlRecipes.recipeDelete);
+    
+router
+    .route('/:recipeid/comments')
+    .post(ctrlComments.commentCreate)
+    .get(ctrlComments.commentList);
+
+router
+    .route('/recipes/:recipeid/:commentid')
+    .get(ctrlComments.commentRead)
+    .put(ctrlComments.commentUpdate)
+    .delete(ctrlComments.commentDelete);
 
 module.exports = router;
 

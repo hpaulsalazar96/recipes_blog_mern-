@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const recipes = mongoose.model('recipe');
+const comments = mongoose.model('comment');
 
-
-const recipeCreate = (req, res) => {
-    recipes.create({
+const commentCreate = (req, res) => {
+    /*recipes.create({
         title: req.body.title,
         author: req.body.author,
         img: req.body.img,
@@ -21,12 +20,12 @@ const recipeCreate = (req, res) => {
                 .status(201)
                 .json(recipeObject);
         }
-    });
+    });*/
     
 }
 
-const recipeList = (req, res) => {
-    recipes
+const commentList = (req, res) => {
+    /*recipes
         .find()
         .exec((err, recipeObject)=>{
             if(!recipeObject){
@@ -48,11 +47,11 @@ const recipeList = (req, res) => {
     //    .status(200)
     //    .json({
     //        "status": "listed successfully"
-    //    });
+    //    });*/
 }
 
-const recipeRead = (req, res) => {
-    recipes
+const commentRead = (req, res) => {
+    /*recipes
         .findById(req.params.recipeid)
         .exec((err, recipeObject)=>{
             if(!recipeObject){
@@ -69,11 +68,11 @@ const recipeRead = (req, res) => {
             res
             .status(200)
             .json(recipeObject);
-        })
+        })*/
 }
 
-const recipeUpdate = (req, res) => {
-    if (!req.params.recipeid) {
+const commentUpdate = (req, res) => {
+    /*if (!req.params.recipeid) {
         return res
             .status(404)
             .json({
@@ -113,11 +112,11 @@ const recipeUpdate = (req, res) => {
                         .json(recipes);
                 }
             });
-        });
+        });*/
 }
 
-const recipeDelete = (req, res) => {
-    if (req.params.recipeid) {
+const commentDelete = (req, res) => {
+    /*if (req.params.recipeid) {
         recipes
             .findByIdAndDelete(req.params.recipeid)
             .exec((err, recipeObject) => {
@@ -135,13 +134,13 @@ const recipeDelete = (req, res) => {
                     .status(204)
                     .json(null);
             });
-    }
+    }*/
 }
 
 module.exports = {
-    recipeCreate, 
-    recipeList,
-    recipeRead,
-    recipeUpdate,
-    recipeDelete
+    commentCreate, 
+    commentList,
+    commentRead,
+    commentUpdate,
+    commentDelete
 }

@@ -23,6 +23,9 @@ const recipesSchema= new mongoose.Schema({
     ingredients : {
         type : [String],
     },
+    comments : {
+        type : [String],
+    },
 })
 
 const RecipeModel = new mongoose.model('recipe', recipesSchema);
@@ -33,7 +36,8 @@ const recipe = new RecipeModel({
     img: '2.jpg',
     relatedIssues : ["Hipertension"],
     description : "Instrucciones para la preparacion",
-    ingredients : ["2 tomates", "1/4 litro de leche", "cebolla", "2 piminetos", "2 pechugas de pollo", "1 taza de arroz"]
+    ingredients : ["2 tomates", "1/4 litro de leche", "cebolla", "2 piminetos", "2 pechugas de pollo", "1 taza de arroz"],
+    comments : ["640b4432081a2afbf9fd8ddf"]
 })
 
-//recipe.save()
+recipe.save()
