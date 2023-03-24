@@ -44,11 +44,6 @@ const recipeList = (req, res) => {
                 .status(200)
                 .json(recipeObject);
         })
-    //res
-    //    .status(200)
-    //    .json({
-    //        "status": "listed successfully"
-    //    });
 }
 
 const recipeRead = (req, res) => {

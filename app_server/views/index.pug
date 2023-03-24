@@ -9,20 +9,24 @@ block content
       each recipe in recipesObject
         - pos++
         div(class="fakeimg2") #{recipe.img}
-        a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes/read') View
-        
+        a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
         p
-          
           b No.:
           | #{pos}
         p
           b Titulo
           |  #{recipe.title}
-
         b Related Issues
         each issue in recipe.relatedIssues
           p
               | &dot;  #{issue}
           p
+        b Principal Ingredient
+        each ingredient in recipe.ingredients
+          p
+              | &dot;  #{recipe.ingredients}
+          p
+        hr
+        hr
         hr
       hr

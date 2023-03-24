@@ -10,7 +10,7 @@ block content
             .row
               .col-md-7.pe-0
                 .form-left.h-100.py-5.px-5
-                  form.row.g-4(action='')
+                  form.row.g-4(action, method="post", role="form")
                     .col-12
                       label
                         | Title
@@ -18,7 +18,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Enter Title')
+                        input.form-control(type='text' name="title" placeholder='Enter Title')
                     .col-12
                       label
                         | Author
@@ -26,7 +26,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Enter Author')
+                        input.form-control(type='text' name="author" placeholder='Enter Author')
                     .col-12
                       label
                         | Related Issues
@@ -50,7 +50,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-lock-fill
-                        input.form-control(type='text' placeholder='Description')
+                        input.form-control(type='text' name="description" placeholder='Description')
                     .col-12
                       label
                         | Ingredients
@@ -66,7 +66,7 @@ block content
                           option(value="Verduras") Verduras
                           option(value="Frutas") Frutas
                     .col-12
-                      a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes') Save
+                      button.btn.btn-primary.px-4.float-end.mt-4(type='submit') Save
               .col-md-5.ps-0.d-none.d-md-block
                 .form-right.h-100.bg-primary.text-white.text-center.pt-5
                   i.bi.bi-bootstrap

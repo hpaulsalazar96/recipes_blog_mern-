@@ -4,23 +4,24 @@ block content
     .base_page.bg-light
         .pad_mod
             div(class="fakeimg float-right") #{recipe.img}
-            h2= title
+            //h2= title
             h3 #{recipe.title}
             p Author: #{recipe.author}
             img.rounded.float-right(src=`../../${recipe.img}` alt=`alt:${recipe.img}`)
             
             hr
             b Related Issues:
-            each issue in recipe.related_issues
+            each issue in recipe.relatedIssues
                 p
-                | &dot;  #{issue.description}
+                | &dot;  #{issue}
                 p
             hr
             b Ingredients:
-            each item in recipe.items
+            each item in recipe.ingredients
                 p
-                | &dot;  #{item.name}
+                | &dot;  #{item}
                 p
             hr
-            p #{recipe.content}
+            b Instructions:
+            p #{recipe.description}
             hr

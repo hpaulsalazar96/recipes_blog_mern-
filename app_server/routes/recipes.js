@@ -12,7 +12,10 @@ router
     .get(ctrlRecipe.recipeCreate)
     .post(ctrlRecipe.addRecipe);
 
-router.get('/read', ctrlRecipe.recipeRead);
+router
+    .route('/read/:recipeId')
+    .get(ctrlRecipe.getRecipe)
+    .post(ctrlRecipe.getRecipe);
 
 //router.get('/update', ctrlRecipe.recipeUpdate);
 

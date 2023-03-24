@@ -28,7 +28,7 @@ const recipesSchema= new mongoose.Schema({
 const RecipeModel = new mongoose.model('recipe', recipesSchema);
 
 const recipe = new RecipeModel({
-    title : "Fruta Cocinada",
+    title : "Fruta Repetida",
     author : "PSV",
     img: 'Fruta.jpg',
     relatedIssues : ["Hipertension"],

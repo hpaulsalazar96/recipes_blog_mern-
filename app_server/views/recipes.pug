@@ -12,8 +12,7 @@ block content
       each recipe in recipes
         - pos++
         div(class="fakeimg2") #{recipe.img}
-        a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes/read') View
-        
+        a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
         p
           
           b No.:
@@ -21,13 +20,17 @@ block content
         p
           b Titulo
           |  #{recipe.title}
-        p
-          b Contenido
-          |  #{recipe.content}
         b Related Issues
-        each issue in recipe.related_issues
+        each issue in recipe.relatedIssues
           p
-              | &dot;  #{issue.description}
+              | &dot;  #{issue}
           p
+        b Principal Ingredient
+        each ingredient in recipe.ingredients
+          p
+              | &dot;  #{recipe.ingredients}
+          p
+        hr
+        hr
         hr
       hr

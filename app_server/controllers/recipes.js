@@ -95,9 +95,33 @@ let recipes = [
 ]
 
 const index = (req, res, next) => {
+  const path = '/api/recipes/';
+  const requestOptions = { // objeto cargado con las opciones para request
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  };
+
+  request(requestOptions,
+    (err, response, body) => {
+      if (err) {
+        console.log(err);
+      } else if (response.statusCode === 200) {
+        console.log('Objeto resultante: ', body);
+        renderIndex(req, res, body);
+      } else {
+        console.log(response.statusCode);
+        res.render('error', {
+          message: 'Existe un error en la colección recetas'
+        });
+      }
+    });
+}
+
+const renderIndex = (req, res, responseBody) => {
   res.render('recipes', {
     title: 'Recipes',
-    recipes
+    recipes: responseBody
   });
 }
 
@@ -113,10 +137,10 @@ const addRecipe = (req, res) => {
   const postdata = {
     title: req.body.title,
     author: req.body.author,
-    img: req.body.img,
+    img: req.body.ingredients[0],
     relatedIssues: req.body.relatedIssues,
-    password: req.body.password,
-    superuser: req.body.superuser,
+    description: req.body.description,
+    ingredients: req.body.ingredients
   }
 
   const requestOptions = { // objeto cargado con las opciones para request
@@ -124,31 +148,61 @@ const addRecipe = (req, res) => {
     method: 'POST',
     json: postdata
   };
-  if (req.body.password === req.body.cpassword) {
-    request(requestOptions,
-      (err, response, body) => {
+  request(requestOptions,
+    (err, response, body) => {
+      console.log('Opciones: ', requestOptions);
+      if (response.statusCode === 201) { // creación exitosa
+        console.log('Body: ', body);
+        // volver a mostrar la vista users_add para el ingreso de más documentos
+        return res.redirect('/');
+      } else {
+        console.log('statuscode: ', response.statusCode);
+        console.log('error: ', err);
+        console.log('req.body: ', req.body);
         console.log('Opciones: ', requestOptions);
-        if (response.statusCode === 201) { // creación exitosa
-          console.log('Body: ', body);
-          // volver a mostrar la vista users_add para el ingreso de más documentos
-          return res.redirect('/login');
-        } else {
-          console.log('statuscode: ', response.statusCode);
-          console.log('error: ', err);
-          console.log('req.body: ', req.body);
-          console.log('Opciones: ', requestOptions);
-          res.render('error', { message: 'Existe un error en la creación de usuarios' });
-        }
-      });
-  } else {
-    console.log("no coincide la contraseña");
-  }
+        res.render('error', { message: 'Existe un error en la creación de usuarios' });
+      }
+    });
 }
 
 const recipeRead = (req, res, next) => {
   res.render('recipe', {
     title: 'Recipes For You',
     recipe: recipes.at(0)
+  });
+}
+
+const getRecipe = (req, res, next) => {
+  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
+  console.log(req.params.recipeId);
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  }
+  console.log('Ruta: ', path);
+  request(
+    requestOptions, // Opciones
+    (err, response, body) => { // callback con sus 3 partes
+      console.log('Documento: ', body);
+      console.log('Status Code: ', response.statusCode);
+      if (err) {
+        console.log('Request encontró el error: ', err);
+      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+        renderRecipe(req, res, body); // llamar a la función que hace render de la vista
+      } else {
+        console.log('Status Code: ', response.statusCode);
+        res.render('error', {
+          mensaje: 'Existe un error en la colección usuarios'
+        })
+      }
+    });
+}
+
+const renderRecipe = (req, res, responseBody) => {
+  res.render('recipe', {
+    title: 'Recipes For You',
+    recipe: responseBody
   });
 }
 
@@ -169,7 +223,7 @@ const recipeDelete = (req, res, next) => {
 module.exports = {
   index,
   recipeCreate,
-  recipeRead,
+  getRecipe,
   recipeDelete,
   addRecipe
   //recipeUpdate,
