@@ -17,11 +17,15 @@ router
 router
     .route('/read/:recipeId')
     .get(ctrlRecipe.getRecipe)
-    .post(ctrlComment.addComment);
+    .post(ctrlComment.onAction);
 
 router
     .route('/read/:recipeId/:commentId')
     .get(ctrlComment.addComment)
+
+router
+    .route('/comments/delete/:commentId')
+    .get(ctrlComment.deleteComment)
 
 router
     .route('/update/:recipeId')

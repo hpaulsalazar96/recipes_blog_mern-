@@ -41,6 +41,12 @@ block content
             .card
               .card-body
                 form.row.g-3(action, method="post", role="form")
+                  .col-md-6
+                      label.form-label(for="comments") Describe your comment
+                      input.form-control#content(type="text", name="comments", value=recipe.comments)
+                  .col-md-6
+                      label.form-label(for="recipeReference") Describe your comment
+                      input.form-control#content(type="text", name="recipeReference", value=recipe.recipeReference)
                   .col-md-1
                     label.form-label(for="author") AuthorName
                     input.form-control#author(type="text", name="author", placeholder="UserName")
@@ -76,7 +82,7 @@ block content
                   td.text-center #{comment.author}
                   td.text-center #{comment.score}
                   td.text-center
-                    a.btn.btn-danger.space.text-warning(role='button' href='/recipes/'+recipe._id+'/'+comment._id)
+                    a.btn.btn-danger.space.text-warning(role='button' href='/recipes/comments/delete/'+ comment._id)
                       em.fas.fa-edit
 
 

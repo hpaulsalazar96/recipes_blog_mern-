@@ -94,7 +94,7 @@ const recipeRead = (req, res) => {
                             .status(200)
                             .json(recipeObject);
                     }
-                    console.log(`Se encontró el documento con nombre ${req.params.name}`);
+                    console.log(`Se encontró el documento referente a la receta con id:  ${req.params.recipeid}`);
                     let n_key = 'comments';
                     let n_val = commentsObject;
                     recipeObject.n_key = n_val;

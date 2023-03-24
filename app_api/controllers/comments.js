@@ -67,7 +67,9 @@ const commentRead = (req, res) => {
 }
 
 const commentUpdate = (req, res) => {
-    if (!req.params.recipeid) {
+    let commentid = (req.params.paramId.split("-"))[1]
+    let recipeid = (req.params.paramId.split("-"))[0]
+    if (!recipeid) {
         return res
             .status(404)
             .json({
@@ -75,7 +77,7 @@ const commentUpdate = (req, res) => {
             });
     }
     recipes
-        .findById(req.params.recipeid)
+        .findById(recipeid)
         .exec((err, recipeObject) => {
             if (!recipeObject) {
                 return res
@@ -88,13 +90,10 @@ const commentUpdate = (req, res) => {
                     .status(400)
                     .json(err);
             }
-            recipeObject.title = req.body.title;
             recipeObject.author = req.body.author;
-            recipeObject.img = req.body.img;
-            recipeObject.relatedIssues = req.body.relatedIssues;
-            recipeObject.description = req.body.description;
-            recipeObject.ingredients = req.body.ingredients;
-            recipeObject.comments = req.body.comments;
+            recipeObject.content = req.body.content;
+            recipeObject.score = req.body.score;
+            recipeObject.recipeReference = commentid;
 
             recipeObject.save((err, recipes) => {
                 if (err) {
@@ -111,12 +110,12 @@ const commentUpdate = (req, res) => {
 }
 
 const commentDelete = (req, res) => {
-    /*if (req.params.recipeid) {
-        recipes
-            .findByIdAndDelete(req.params.recipeid)
+    if (req.params.commentid) {
+        comments
+            .findByIdAndDelete(req.params.commentid)
             .exec((err, recipeObject) => {
                 if (!recipeObject) { // findByIdAndDelete no encontró un documento que cumpla con recipeid
-                    console.log(`Receta con el recipeid: ${req.params.recipeid} no encontrado`);
+                    console.log(`Receta con el recipeid: ${req.params.commentid} no encontrado`);
                     return res 
                         .status(404)
                         .json({"mensaje": "Receta no encontrado"});
@@ -129,7 +128,7 @@ const commentDelete = (req, res) => {
                     .status(204)
                     .json(null);
             });
-    }*/
+    }
 }
 
 module.exports = {

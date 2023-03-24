@@ -30,8 +30,12 @@ router
     .delete(ctrlRecipes.recipeDelete);
 
 router
-    .route('/recipes/:recipeid/:commentid')
+    .route('/comments/:paramid')
     .put(ctrlComments.commentUpdate)
+    .delete(ctrlComments.commentDelete);
+
+router
+    .route('/comments/delete/:commentid')
     .delete(ctrlComments.commentDelete);
 
 router 
