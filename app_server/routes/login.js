@@ -5,6 +5,9 @@ const router = express.Router();
 const ctrlLogin = require('../controllers/login')
 
 /* GET login page. */
-router.get('/', ctrlLogin.index);
+router
+    .route('/')
+    .get(ctrlLogin.index)
+    .post(ctrlLogin.getUser);
 
 module.exports = router;

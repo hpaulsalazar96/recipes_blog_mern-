@@ -39,5 +39,9 @@ router
     .put(ctrlComments.commentUpdate)
     .delete(ctrlComments.commentDelete);
 
+router 
+    .route('/search/:username')
+    .get(ctrlUsers.userLog);
+
 module.exports = router;
 

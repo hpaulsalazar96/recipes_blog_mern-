@@ -10,7 +10,7 @@ block content
             .row
               .col-md-7.pe-0
                 .form-left.h-100.py-5.px-5
-                  form.row.g-4(action='')
+                  form.row.g-4(action, method="post", role="form")
                     .col-12
                       label
                         | Username
@@ -18,7 +18,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder=`${information.username}`)
+                        input.form-control(type='text' name="username" value=username placeholder=`${username}`)
                     .col-12
                       label
                         | Email
@@ -26,7 +26,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder=`${information.email}`)
+                        input.form-control(type='text' name="email" value=email placeholder=`${email}`)
                     .col-12
                       label
                         | New Password
@@ -34,7 +34,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-lock-fill
-                        input.form-control(type='text' placeholder='Enter New Password')
+                        input.form-control(type='text' name="password" placeholder='Enter New Password')
                     .col-12
                       label
                         | Confirm New Password
@@ -42,11 +42,33 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Confirm New Password')
+                        input.form-control(type='text' name="cpassword" placeholder='Confirm New Password')
                     .col-12
-                      a.btn.btn-primary.px-4.float-end.mt-2(type='submit' href='/profile') Update
+                      label
+                        | Update Categories
+                        span.text-danger *
+                      .input-group
+                        .input-group-text
+                          i.bi.bi-person-fill
+                        select#relatedIssues.form-select(name="relatedIssues", multiple, aria-label="multiple select issues")
+                          //option(selected) Select Issues
+                          option(value="Diabetes") Diabetes
+                          option(value="Anemia") Anemia
+                          option(value="Obesidad") Obesidad
+                          option(value="Posparto") Posparto
+                          option(value="Issue 1") Issue 1
+                          option(value="Issue 2") Issue 2
+                          option(value="Issue 3") Issue 3
+                    .col-6
+                      .input-group
+                        input.form-control(type='text' name="id" value=id placeholder=`${id}`)
+                    .col-6
+                      .input-group
+                        input.form-control(type='text' name="superuser" value=superuser placeholder=`${superuser}`)
                     .col-12
-                      a.btn.btn-danger.px-4.float-end.mt-2(type='submit' href='/profile') Delete Account
+                      button.btn.btn-primary.px-4.float-end.mt-2(type='submit' name="action" value="update") Update
+                    .col-12
+                      button.btn.btn-danger.px-4.float-end.mt-2(type='submit' name="action" value="delete") Delete Account
               .col-md-5.ps-0.d-none.d-md-block
                 .form-right.h-100.bg-primary.text-white.text-center.pt-5
                   i.bi.bi-bootstrap
@@ -60,12 +82,12 @@ block content
                   - let pos=0
                   h3 Related Problems
                   hr
-                  each issue in information.issues
+                  each issue in relatedIssues
                     - pos++
                     p
                       b Issue 
                         b #{pos}:
-                      |  #{issue.description}
+                      |  #{issue}
                     p
                     hr
                   hr

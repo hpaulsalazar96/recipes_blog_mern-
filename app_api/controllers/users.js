@@ -133,10 +133,40 @@ const userDelete = (req, res) => {
     }
 }
 
+const userLog =(req, res)=> {
+    const search = new RegExp(req.params.username); // permite buscar la ocurrencia de un texto en un campo. Ej.: parte de un nombre
+    console.log (`Buscar usuario con nombre: ', ${search}`)
+    users
+        // .find({ 'nombre' : buscar }) // búsqueda por ocurrencia
+        .find({ 
+            'username' : req.params.username // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
+        }) // obtener todos los documentos de la coleccion que cumplen con el criterio de busqueda
+        .exec((err, objetoUsuario)=>{
+            if (!objetoUsuario || objetoUsuario.length == 0) { // find no encontro el documentos en la coleccion
+                console.log(`No existen documentos con nombre ${search}`);
+                return res // respondo el mensaje en formato JSON y status HTTP 404
+                    .status(404)
+                    .json({
+                        "Mensaje": "Usuario no encontrado"
+                    });
+            } else if (err) { // find encontro un error
+                console.log(`Se encontro un error en la coleccion ${users} con nombre: ${search}`);
+                return res // respondo el error en formato JSON y status HTTP 404
+                    .status(404)
+                    .json(err);
+            }
+            console.log(`Se encontró el documento con nombre ${req.params.username}`);
+            res // respondo los documentos encontrados en formato JSON y status HTTP 200
+                .status(200)
+                .json(objetoUsuario);
+        });
+}
+
 module.exports = {
     userCreate, 
     userList,
     userRead,
     userUpdate,
-    userDelete
+    userDelete,
+    userLog
 }

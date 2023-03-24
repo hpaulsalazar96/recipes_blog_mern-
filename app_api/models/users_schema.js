@@ -18,7 +18,8 @@ const usersSchema = new mongoose.Schema({
     },
     superuser : {
         type : Boolean,
-        require: true
+        require: true,
+        'default': false
     },
 })
 

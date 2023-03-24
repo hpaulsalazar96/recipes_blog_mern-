@@ -10,7 +10,7 @@ block content
             .row
               .col-md-7.pe-0
                 .form-left.h-100.py-5.px-5
-                  form.row.g-4(action='')
+                  form.row.g-4(action, method="post", role="form")
                     .col-12
                       label
                         | Username
@@ -18,7 +18,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Enter Username')
+                        input.form-control(type='text' name="username" placeholder='Enter Username')
                     .col-12
                       label
                         | Password
@@ -26,7 +26,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-lock-fill
-                        input.form-control(type='text' placeholder='Enter Password')
+                        input.form-control(type='password' name="password" placeholder='Enter Password')
                     .col-sm-6
                       .form-check
                         input#inlineFormCheck.form-check-input(type='checkbox')
@@ -34,7 +34,7 @@ block content
                     .col-sm-6
                       a.float-end.text-primary(href='#') Forgot Password?
                     .col-12
-                      a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/') login
+                      button.btn.btn-primary.px-4.float-end.mt-4(type='submit') login
               .col-md-5.ps-0.d-none.d-md-block
                 .form-right.h-100.bg-primary.text-white.text-center.pt-5
                   i.bi.bi-bootstrap

@@ -5,6 +5,9 @@ const router = express.Router();
 const ctrlSignup = require('../controllers/signup')
 
 /* GET signup page. */
-router.get('/', ctrlSignup.index);
+router
+    .route('/')    
+    .get(ctrlSignup.index)
+    .post(ctrlSignup.addUser);
 
 module.exports = router;
