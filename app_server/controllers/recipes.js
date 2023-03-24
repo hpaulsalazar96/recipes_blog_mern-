@@ -102,10 +102,47 @@ const index = (req, res, next) => {
 }
 
 const recipeCreate = (req, res, next) => {
-  res.render('recipes_create_form', {
+  res.render('recipes_add', {
     title: 'Recipes',
     message: 'Healthy Meal On Comming!!!'
   });
+}
+
+const addRecipe = (req, res) => {
+  const path = '/api/recipes/';
+  const postdata = {
+    title: req.body.title,
+    author: req.body.author,
+    img: req.body.img,
+    relatedIssues: req.body.relatedIssues,
+    password: req.body.password,
+    superuser: req.body.superuser,
+  }
+
+  const requestOptions = { // objeto cargado con las opciones para request
+    url: `${apiOptions.server}${path}`,
+    method: 'POST',
+    json: postdata
+  };
+  if (req.body.password === req.body.cpassword) {
+    request(requestOptions,
+      (err, response, body) => {
+        console.log('Opciones: ', requestOptions);
+        if (response.statusCode === 201) { // creación exitosa
+          console.log('Body: ', body);
+          // volver a mostrar la vista users_add para el ingreso de más documentos
+          return res.redirect('/login');
+        } else {
+          console.log('statuscode: ', response.statusCode);
+          console.log('error: ', err);
+          console.log('req.body: ', req.body);
+          console.log('Opciones: ', requestOptions);
+          res.render('error', { message: 'Existe un error en la creación de usuarios' });
+        }
+      });
+  } else {
+    console.log("no coincide la contraseña");
+  }
 }
 
 const recipeRead = (req, res, next) => {
@@ -134,5 +171,6 @@ module.exports = {
   recipeCreate,
   recipeRead,
   recipeDelete,
+  addRecipe
   //recipeUpdate,
 };

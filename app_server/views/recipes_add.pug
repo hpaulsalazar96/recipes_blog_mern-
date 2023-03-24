@@ -34,7 +34,15 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Separated with coma')
+                        select#relatedIssues.form-select(name="relatedIssues", multiple, aria-label="multiple select issues")
+                          //option(selected) Select Issues
+                          option(value="Diabetes") Diabetes
+                          option(value="Anemia") Anemia
+                          option(value="Obesidad") Obesidad
+                          option(value="Posparto") Posparto
+                          option(value="Issue 1") Issue 1
+                          option(value="Issue 2") Issue 2
+                          option(value="Issue 3") Issue 3
                     .col-12
                       label
                         | Description
@@ -43,7 +51,6 @@ block content
                         .input-group-text
                           i.bi.bi-lock-fill
                         input.form-control(type='text' placeholder='Description')
-                    
                     .col-12
                       label
                         | Ingredients
@@ -51,8 +58,13 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' placeholder='Separated with coma')
-
+                        select#ingredients.form-select(name="ingredients", multiple, aria-label="multiple select issues")
+                          //option(selected) Select Issues
+                          option(value="Proteina Animal") Proteina Animal
+                          option(value="Proteina Vegetal") Proteina Vegetal
+                          option(value="Carbohidratos Simples") Carbohidratos Simples
+                          option(value="Verduras") Verduras
+                          option(value="Frutas") Frutas
                     .col-12
                       a.btn.btn-primary.px-4.float-end.mt-4(type='submit' href='/recipes') Save
               .col-md-5.ps-0.d-none.d-md-block

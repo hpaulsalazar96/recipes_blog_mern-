@@ -7,7 +7,10 @@ const ctrlRecipe = require('../controllers/recipes')
 /* GET recipe page. */
 router.get('/', ctrlRecipe.index);
 
-router.get('/create', ctrlRecipe.recipeCreate);
+router
+    .route('/create')
+    .get(ctrlRecipe.recipeCreate)
+    .post(ctrlRecipe.addRecipe);
 
 router.get('/read', ctrlRecipe.recipeRead);
 
