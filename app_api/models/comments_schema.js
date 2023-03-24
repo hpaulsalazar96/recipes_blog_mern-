@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const commentsSchema = new mongoose.Schema({
-    user : {
+    author : {
         type : String,
         require: true
     },
-    description : {
+    content : {
         type : String,
         require: true
     },
@@ -20,9 +20,9 @@ const commentsSchema = new mongoose.Schema({
 const CommentModel = new mongoose.model('comment', commentsSchema);
 
 const comment = new CommentModel({
-    user : "640b44038a7b6f92f51ef0be",
-    description : "Me gusto mucho",
-    score : 15.5,
+    author : "640b44038a7b6f92f51ef0be",
+    content : "Me gusto mucho",
+    score : 3,
     recipeReference : "12312312312312312312131"
 })
 

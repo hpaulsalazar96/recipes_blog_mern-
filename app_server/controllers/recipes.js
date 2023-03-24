@@ -9,88 +9,30 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://recipes-blog.herokuapp.com' // server remoto - produccion
 };
 
-let recipes = [
+let comments = [
   {
-    title: 'Recipe 1',
-    author: 'Manuel A',
-    img: '1.jpg',
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id odio laoreet diam commodo porttitor. Donec non enim commodo, gravida ipsum in, accumsan est. Vestibulum pharetra sed dolor quis bibendum. Etiam ipsum orci, aliquam sit amet vulputate non, fermentum viverra felis. Nullam eget semper sem, eu feugiat magna. Sed fringilla bibendum felis et ultricies. Ut imperdiet bibendum tellus, at convallis arcu facilisis sit amet. Cras pellentesque vehicula ligula, vitae ullamcorper purus aliquet a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc eget tortor felis. Morbi id vehicula metus. Morbi sed pharetra purus. Nam blandit dapibus nisl vel aliquet. Fusce iaculis justo massa, ac convallis lorem rutrum in. Pellentesque pharetra ullamcorper nisi eu tristique. Sed faucibus, dolor et vestibulum feugiat, nunc dolor tempus massa, vel facilisis enim metus eget dolor. ",
-    items: [
-      {
-        name: 'sal 1 Cucharada'
-      },
-      {
-        name: 'pechuga de pollo 500mg'
-      },
-    ],
-    related_issues: [
-      {
-        description: 'Diabetes 1'
-      },
-      {
-        description: 'Hipertension'
-      },
-    ]
+    _id: '640b4490ce34e6871cba1ad6',
+    author: "hmendez",
+    score: 5,
+    content: "Lo que pienso...................."
   },
   {
-    title: 'Recipe 2',
-    author: 'Manuel A',
-    img: '2.jpg',
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id odio laoreet diam commodo porttitor. Donec non enim commodo, gravida ipsum in, accumsan est. Vestibulum pharetra sed dolor quis bibendum. Etiam ipsum orci, aliquam sit amet vulputate non, fermentum viverra felis. Nullam eget semper sem, eu feugiat magna. Sed fringilla bibendum felis et ultricies. Ut imperdiet bibendum tellus, at convallis arcu facilisis sit amet. Cras pellentesque vehicula ligula, vitae ullamcorper purus aliquet a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc eget tortor felis. Morbi id vehicula metus. Morbi sed pharetra purus. Nam blandit dapibus nisl vel aliquet. Fusce iaculis justo massa, ac convallis lorem rutrum in. Pellentesque pharetra ullamcorper nisi eu tristique. Sed faucibus, dolor et vestibulum feugiat, nunc dolor tempus massa, vel facilisis enim metus eget dolor. ",
-    items: [
-      {
-        name: 'sal'
-      },
-      {
-        name: 'pechuga de pollo'
-      },
-    ],
-    related_issues: [
-      {
-        description: 'Diabetes 2'
-      },
-    ]
+    _id: '640b4490ce34e6871cba1ad6',
+    author: "hmendez1",
+    score: 4,
+    content: "Lo que pienso...................."
   },
   {
-    title: 'Recipe 3',
-    author: 'Manuel A',
-    img: '3.jpg',
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id odio laoreet diam commodo porttitor. Donec non enim commodo, gravida ipsum in, accumsan est. Vestibulum pharetra sed dolor quis bibendum. Etiam ipsum orci, aliquam sit amet vulputate non, fermentum viverra felis. Nullam eget semper sem, eu feugiat magna. Sed fringilla bibendum felis et ultricies. Ut imperdiet bibendum tellus, at convallis arcu facilisis sit amet. Cras pellentesque vehicula ligula, vitae ullamcorper purus aliquet a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc eget tortor felis. Morbi id vehicula metus. Morbi sed pharetra purus. Nam blandit dapibus nisl vel aliquet. Fusce iaculis justo massa, ac convallis lorem rutrum in. Pellentesque pharetra ullamcorper nisi eu tristique. Sed faucibus, dolor et vestibulum feugiat, nunc dolor tempus massa, vel facilisis enim metus eget dolor. ",
-    items: [
-      {
-        name: 'sal'
-      },
-      {
-        name: 'pechuga de pollo'
-      },
-    ],
-    related_issues: [
-      {
-        description: 'Hipertension'
-      },
-    ]
+    _id: '640b4490ce34e6871cba1ad6',
+    author: "hmendez1",
+    score: 3,
+    content: "Lo que pienso...................."
   },
   {
-    title: 'Recipe 4',
-    author: 'Manuel A',
-    img: '4.jpg',
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id odio laoreet diam commodo porttitor. Donec non enim commodo, gravida ipsum in, accumsan est. Vestibulum pharetra sed dolor quis bibendum. Etiam ipsum orci, aliquam sit amet vulputate non, fermentum viverra felis. Nullam eget semper sem, eu feugiat magna. Sed fringilla bibendum felis et ultricies. Ut imperdiet bibendum tellus, at convallis arcu facilisis sit amet. Cras pellentesque vehicula ligula, vitae ullamcorper purus aliquet a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc eget tortor felis. Morbi id vehicula metus. Morbi sed pharetra purus. Nam blandit dapibus nisl vel aliquet. Fusce iaculis justo massa, ac convallis lorem rutrum in. Pellentesque pharetra ullamcorper nisi eu tristique. Sed faucibus, dolor et vestibulum feugiat, nunc dolor tempus massa, vel facilisis enim metus eget dolor. ",
-    items: [
-      {
-        name: 'sal'
-      },
-      {
-        name: 'pechuga de pollo'
-      },
-    ],
-    related_issues: [
-      {
-        description: 'Diabetes 1'
-      },
-      {
-        description: 'Hipertension'
-      },
-    ]
+    _id: '640b4490ce34e6871cba1ad6',
+    author: "hmendez1",
+    score: 2,
+    content: "Lo que pienso...................."
   },
 ]
 
@@ -165,13 +107,6 @@ const addRecipe = (req, res) => {
     });
 }
 
-const recipeRead = (req, res, next) => {
-  res.render('recipe', {
-    title: 'Recipes For You',
-    recipe: recipes.at(0)
-  });
-}
-
 const getRecipe = (req, res, next) => {
   const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
   console.log(req.params.recipeId);
@@ -202,14 +137,7 @@ const getRecipe = (req, res, next) => {
 const renderRecipe = (req, res, responseBody) => {
   res.render('recipe', {
     title: 'Recipes For You',
-    recipe: responseBody
-  });
-}
-
-const recipeDelete = (req, res, next) => {
-  res.render('recipes_delete', {
-    title: 'Recipes',
-    recipes
+    recipe: responseBody,
   });
 }
 
@@ -220,11 +148,154 @@ const recipeDelete = (req, res, next) => {
     });
   }*/
 
+
+
+const updateRecipe = (req, res, next) => {
+  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  }
+  console.log('Ruta: ', path);
+  request(
+    requestOptions, // Opciones
+    (err, response, body) => { // callback con sus 3 partes
+      console.log('Documento: ', body);
+      console.log('Status Code: ', response.statusCode);
+      if (err) {
+        console.log('Request encontró el error: ', err);
+      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+        console.log('Objeto Resultante: ', typeof body);
+        renderUpdateRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
+      } else {
+        console.log('Status Code: ', response.statusCode);
+        res.render('error', {
+          mensaje: 'Existe un error en la colección usuarios'
+        })
+      }
+    });
+}
+
+// 0. Render de la vista users_update - Mostrar Formulario
+const renderUpdateRecipe = (req, res, responseBody) => {
+  res.render('recipes_update', {
+    title: 'Update Recipe',
+    message: 'Update Your Recipe',
+    recipe: responseBody
+  });
+}
+
+// 2. Eliminar el documento
+const doUpdateRecipe = (req, res) => {
+  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para eliminar por Id;
+  const postdata = {
+    title: req.body.title,
+    author: req.body.author,
+    img: req.body.ingredients[0],
+    relatedIssues: req.body.relatedIssues,
+    description: req.body.description,
+    ingredients: req.body.ingredients
+  }
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'PUT',
+    json: postdata
+  }
+  console.log('Ruta: ', path);
+  request(requestOptions,
+    (err, response, body) => {
+      console.log('Opciones: ', requestOptions);
+      if (response.statusCode === 200) { // creación exitosa
+        console.log('Body: ', body);
+        // volver a mostrar la vista users_add para el ingreso de más documentos
+        return res.redirect('/'); // retorno a la página de inicio
+      } else {
+        console.log('statuscode: ', response.statusCode);
+        console.log('error: ', err);
+        console.log('req.body: ', req.body);
+        console.log('Opciones: ', requestOptions);
+        res.render('error', { message: 'Existe un error en la creación de usuarios' });
+      }
+    });
+}
+
+const deleteRecipe = (req, res) => {
+  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  }
+  console.log('Ruta: ', path);
+  request(
+    requestOptions, // Opciones
+    (err, response, body) => { // callback con sus 3 partes
+      console.log('Documento: ', body);
+      console.log('Status Code: ', response.statusCode);
+      if (err) {
+        console.log('Request encontró el error: ', err);
+      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+        console.log('Objeto Resultante: ', body);
+        renderDeleteRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
+      } else {
+        console.log('Status Code: ', response.statusCode);
+        res.render('error', {
+          mensaje: 'Existe un error en la colección usuarios'
+        })
+      }
+    });
+}
+
+// Eliminación de usuarios 
+
+// 0. Render de la vista users_delete - Mostrar Formulario
+const renderDeleteRecipe = (req, res, responseBody) => {
+  res.render('recipes_delete', {
+    title: 'Delete Recipe',
+    message: 'Delete this Recipe',
+    recipe: responseBody
+  });
+}
+
+
+// 2. Eliminar el documento
+const doDeleteRecipe = (req, res) => {
+  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para eliminar por Id;
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'DELETE',
+    json: {}
+  }
+  console.log('Ruta: ', path);
+  request(
+    requestOptions, // Opciones
+    (err, response, body) => { // callback con sus 3 partes
+      console.log('Documento: ', body);
+      console.log('Status Code: ', response.statusCode);
+      if (err) {
+        console.log('Request encontró el error: ', err);
+      } else if (response.statusCode === 204) { // delete status code
+        console.log('Body: ', body);
+        return res.redirect('/'); // retorno a la página de inicio
+      } else {
+        console.log('Status Code: ', response.statusCode);
+        res.render('error', {
+          mensaje: 'Existe un error en la colección recetas'
+        })
+      }
+    });
+}
+
+
+
 module.exports = {
   index,
   recipeCreate,
   getRecipe,
-  recipeDelete,
-  addRecipe
-  //recipeUpdate,
+  addRecipe,
+  updateRecipe,
+  doUpdateRecipe,
+  deleteRecipe,
+  doDeleteRecipe
 };

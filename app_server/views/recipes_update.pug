@@ -17,7 +17,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' name="title" value=recipe.title placeholder='Enter Title' readonly='')
+                        input.form-control(type='text' name="title" value=recipe.title placeholder='Enter Title')
                     .col-12
                       label
                         | Author
@@ -25,7 +25,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='text' name="author" value=recipe.author placeholder='Enter Author' readonly='')
+                        input.form-control(type='text' name="author" value=recipe.author placeholder='Enter Author')
                     .col-12
                       label
                         | Related Issues
@@ -33,7 +33,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        select#relatedIssues.form-select(name="relatedIssues", multiple, aria-label="multiple select issues" readonly='' disabled)
+                        select#relatedIssues.form-select(name="relatedIssues", multiple, aria-label="multiple select issues")
                           //option(selected) Select Issues
                           option(value="Diabetes") Diabetes
                           option(value="Anemia") Anemia
@@ -49,7 +49,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-lock-fill
-                        input.form-control(type='text' name="description" value=recipe.description placeholder='Description' readonly='' disabled)
+                        input.form-control(type='text' name="description" value=recipe.description placeholder='Description')
                     .col-12
                       label
                         | Ingredients
@@ -57,7 +57,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        select#ingredients.form-select(name="ingredients", value=recipe.ingredients multiple, aria-label="multiple select issues" readonly='' disabled)
+                        select#ingredients.form-select(name="ingredients", value=ingredients multiple, aria-label="multiple select issues")
                           //option(selected) Select Issues
                           option(value="Proteina Animal") Proteina Animal
                           option(value="Proteina Vegetal") Proteina Vegetal
@@ -65,7 +65,7 @@ block content
                           option(value="Verduras") Verduras
                           option(value="Frutas") Frutas
                     .col-12
-                      button.btn.btn-danger.px-4.float-end.mt-4(type='submit') Delete
+                      button.btn.btn-primary.px-4.float-end.mt-4(type='submit') Update
               .col-md-5.ps-0.d-none.d-md-block
                 .form-right.h-100.bg-primary.text-white.text-center.pt-5
                   i.bi.bi-bootstrap

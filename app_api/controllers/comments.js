@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 const comments = mongoose.model('comment');
 
 const commentCreate = (req, res) => {
-    /*recipes.create({
-        title: req.body.title,
+    comments.create({
         author: req.body.author,
-        img: req.body.img,
-        relatedIssues: req.body.relatedIssues,
-        description: req.body.description,
-        ingredients: req.body.ingredients,
-        comments: req.body.comments,
+        score: req.body.score,
+        content: req.body.content,
+        recipeReference: req.params.recipeid,
     }, (err, recipeObject) => {
         if (err) {
             res
@@ -20,20 +17,23 @@ const commentCreate = (req, res) => {
                 .status(201)
                 .json(recipeObject);
         }
-    });*/
-    
+    });
+
 }
 
+
+
+
 const commentList = (req, res) => {
-    /*recipes
+    comments
         .find()
-        .exec((err, recipeObject)=>{
-            if(!recipeObject){
+        .exec((err, recipeObject) => {
+            if (!recipeObject) {
                 console.log(`recetas no encontrados)`);
                 return res
                     .status(404)
-                    .json({"mensaje" : "recetas no encontrados"})
-            }else if(err){
+                    .json({ "mensaje": "recetas no encontrados" })
+            } else if (err) {
                 console.log(`usuarios tiene errores)`);
                 return res
                     .status(404)
@@ -43,36 +43,31 @@ const commentList = (req, res) => {
                 .status(200)
                 .json(recipeObject);
         })
-    //res
-    //    .status(200)
-    //    .json({
-    //        "status": "listed successfully"
-    //    });*/
 }
 
 const commentRead = (req, res) => {
-    /*recipes
+    comments
         .findById(req.params.recipeid)
-        .exec((err, recipeObject)=>{
-            if(!recipeObject){
+        .exec((err, recipeObject) => {
+            if (!recipeObject) {
                 console.log(`receta especificado: ${req.params.recipeid} no encontrado)`);
                 return res
                     .status(404)
-                    .json({"mensaje" : "receta no encontrada"})
-            }else if(err){
+                    .json({ "mensaje": "receta no encontrada" })
+            } else if (err) {
                 console.log(`receta especificada: ${req.params.recipeid} tiene errores)`);
                 return res
                     .status(404)
                     .json(err);
             }
             res
-            .status(200)
-            .json(recipeObject);
-        })*/
+                .status(200)
+                .json(recipeObject);
+        })
 }
 
 const commentUpdate = (req, res) => {
-    /*if (!req.params.recipeid) {
+    if (!req.params.recipeid) {
         return res
             .status(404)
             .json({
@@ -112,7 +107,7 @@ const commentUpdate = (req, res) => {
                         .json(recipes);
                 }
             });
-        });*/
+        });
 }
 
 const commentDelete = (req, res) => {
@@ -138,7 +133,7 @@ const commentDelete = (req, res) => {
 }
 
 module.exports = {
-    commentCreate, 
+    commentCreate,
     commentList,
     commentRead,
     commentUpdate,

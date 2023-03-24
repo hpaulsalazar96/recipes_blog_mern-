@@ -3,22 +3,34 @@ const router = express.Router();
 
 //controllers imports
 const ctrlRecipe = require('../controllers/recipes')
+const ctrlComment = require('../controllers/comments')
+
 
 /* GET recipe page. */
 router.get('/', ctrlRecipe.index);
 
 router
-    .route('/create')
+    .route('/add')
     .get(ctrlRecipe.recipeCreate)
     .post(ctrlRecipe.addRecipe);
 
 router
     .route('/read/:recipeId')
     .get(ctrlRecipe.getRecipe)
-    .post(ctrlRecipe.getRecipe);
+    .post(ctrlComment.addComment);
 
-//router.get('/update', ctrlRecipe.recipeUpdate);
+router
+    .route('/read/:recipeId/:commentId')
+    .get(ctrlComment.addComment)
 
-router.get('/delete', ctrlRecipe.recipeDelete);
+router
+    .route('/update/:recipeId')
+    .get(ctrlRecipe.updateRecipe)
+    .post(ctrlRecipe.doUpdateRecipe);
+
+router
+    .route('/delete/:recipeId')
+    .get(ctrlRecipe.deleteRecipe)
+    .post(ctrlRecipe.doDeleteRecipe);
 
 module.exports = router;

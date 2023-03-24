@@ -25,17 +25,12 @@ router
 router
     .route('/recipes/:recipeid')
     .get(ctrlRecipes.recipeRead)
+    .post(ctrlComments.commentCreate)
     .put(ctrlRecipes.recipeUpdate)
     .delete(ctrlRecipes.recipeDelete);
-    
-router
-    .route('/:recipeid/comments')
-    .post(ctrlComments.commentCreate)
-    .get(ctrlComments.commentList);
 
 router
     .route('/recipes/:recipeid/:commentid')
-    .get(ctrlComments.commentRead)
     .put(ctrlComments.commentUpdate)
     .delete(ctrlComments.commentDelete);
 
