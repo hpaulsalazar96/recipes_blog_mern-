@@ -24,7 +24,7 @@ router
     .get(ctrlComment.addComment)
 
 router
-    .route('/comments/delete/:commentId')
+    .route('/comments/delete/:recipeId/:commentId')
     .get(ctrlComment.deleteComment)
 
 router
@@ -36,5 +36,9 @@ router
     .route('/delete/:recipeId')
     .get(ctrlRecipe.deleteRecipe)
     .post(ctrlRecipe.doDeleteRecipe);
+
+router
+    .route('/search')
+    .get(ctrlRecipe.filterRecipes);
 
 module.exports = router;

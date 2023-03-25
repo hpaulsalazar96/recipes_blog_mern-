@@ -288,6 +288,42 @@ const doDeleteRecipe = (req, res) => {
 }
 
 
+const filterRecipes = (req, res, next) => {
+  const path = `/api/recipes/search/${req.body.filter}`; // invoco a la ruta de la API para buscar por Id;
+  console.log(path);
+  /*
+  console.log(req.params.filter);
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  }
+  console.log('Ruta: ', path);
+  request(
+    requestOptions, // Opciones
+    (err, response, body) => { // callback con sus 3 partes
+      console.log('Documento: ', body);
+      console.log('Status Code: ', response.statusCode);
+      if (err) {
+        console.log('Request encontró el error: ', err);
+      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+        renderFilteredRecipe(req, res, body); // llamar a la función que hace render de la vista
+      } else {
+        console.log('Status Code: ', response.statusCode);
+        res.render('error', {
+          mensaje: 'Existe un error en la colección usuarios'
+        })
+      }
+    });*/
+}
+
+const renderFilteredRecipe = (req, res, responseBody) => {
+  res.render('recipe', {
+    title: 'Recipes For You', 
+    recipe: responseBody,
+  });
+}
+
 
 module.exports = {
   index,
@@ -297,5 +333,6 @@ module.exports = {
   updateRecipe,
   doUpdateRecipe,
   deleteRecipe,
-  doDeleteRecipe
+  doDeleteRecipe,
+  filterRecipes
 };

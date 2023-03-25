@@ -2,6 +2,11 @@ extends layout
 
 block content
   .base_page.bg-light
+      .pad_mod
+        .col-md-6
+          label.form-label() Add Recipe ->
+          a.btn.btn-primary.space.text-warning(role='button' text="Add" href='/recipes/add/')
+  .base_page.bg-light
     .pad_mod
       h1= title
       p Welcome to #{title}

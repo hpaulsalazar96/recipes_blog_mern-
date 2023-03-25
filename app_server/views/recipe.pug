@@ -42,11 +42,9 @@ block content
               .card-body
                 form.row.g-3(action, method="post", role="form")
                   .col-md-6
-                      label.form-label(for="comments") Describe your comment
-                      input.form-control#content(type="text", name="comments", value=recipe.comments)
+                      input.form-control#comments(type="hidden", name="comments", value=recipe.comments)
                   .col-md-6
-                      label.form-label(for="recipeReference") Describe your comment
-                      input.form-control#content(type="text", name="recipeReference", value=recipe.recipeReference)
+                      input.form-control#recipeReference(type="hidden", name="recipeReference", value=recipe._id)
                   .col-md-1
                     label.form-label(for="author") AuthorName
                     input.form-control#author(type="text", name="author", placeholder="UserName")
@@ -72,7 +70,7 @@ block content
               th.text-center(scope="col") Content
               th.text-center(scope="col") Author
               th.text-center(scope="col") Score
-              //th(scope='col') Document
+              th.text-center(scope='col') Delete
             tbody
               - var pos=1
               each comment in recipe.comments
@@ -82,8 +80,17 @@ block content
                   td.text-center #{comment.author}
                   td.text-center #{comment.score}
                   td.text-center
-                    a.btn.btn-danger.space.text-warning(role='button' href='/recipes/comments/delete/'+ comment._id)
+                    form.row.g-3(action, method="post", role="form")
+                      input.form-control#content(type="hidden", name="recipeReference", value=recipe._id)
+                      a.btn.btn-danger.space.text-warning(role='button' href='/recipes/comments/delete/'+recipe._id+'/'+ comment._id)
                       em.fas.fa-edit
-
+    .base_page.bg-light
+      .pad_mod
+        .col-md-6
+          label.form-label() Update Recipe ->
+          a.btn.btn-primary.space.text-warning(role='button' text="Update" href='/recipes/update/'+recipe._id)
+        .col-md-6
+          label.form-label() Delete Recipe ->
+          a.btn.btn-danger.space.text-warning(role='button' text="Update" href='/recipes/delete/'+recipe._id)
 
     

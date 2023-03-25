@@ -60,7 +60,7 @@ const deleteComment = (req, res) => {
                 console.log('Request encontró el error: ', err);
             } else if (response.statusCode === 204) { // delete status code
                 console.log('Objeto Resultante: ', body);
-                return res.redirect(`/recipes/read/641d3ac9a567327e1b130591`); // retorno a la página de inicio
+                return res.redirect(`/recipes/read/${req.params.recipeId}`); // retorno a la página de inicio
             } else {
                 console.log('Status Code: ', response.statusCode);
                 res.render('error', {
@@ -98,13 +98,12 @@ const onAction = (req, res) => {
                     }
                 }
             }
-            const path = `/api/comments/${recipeId+"-"+commentId}`; // invoco a la ruta de la API para eliminar por Id;
+            const path = `/api/comments/${recipeId}/${commentId}`; // invoco a la ruta de la API para eliminar por Id;
             console.log(path);
             const postdata = {
                 author: req.body.author,
                 content: req.body.content,
                 score: req.body.score,
-                recipeReference: recipeId
             }
             const requestOptions = {
                 url: `${apiOptions.server}${path}`, 

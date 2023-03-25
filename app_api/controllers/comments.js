@@ -7,7 +7,7 @@ const commentCreate = (req, res) => {
         score: req.body.score,
         content: req.body.content,
         recipeReference: req.params.recipeid,
-    }, (err, recipeObject) => {
+    }, (err, commentObject) => {
         if (err) {
             res
                 .status(400)
@@ -15,20 +15,17 @@ const commentCreate = (req, res) => {
         } else {
             res
                 .status(201)
-                .json(recipeObject);
+                .json(commentObject);
         }
     });
 
 }
 
-
-
-
 const commentList = (req, res) => {
     comments
         .find()
-        .exec((err, recipeObject) => {
-            if (!recipeObject) {
+        .exec((err, commentObject) => {
+            if (!commentObject) {
                 console.log(`recetas no encontrados)`);
                 return res
                     .status(404)
@@ -41,15 +38,15 @@ const commentList = (req, res) => {
             }
             res
                 .status(200)
-                .json(recipeObject);
+                .json(commentObject);
         })
 }
 
 const commentRead = (req, res) => {
     comments
         .findById(req.params.recipeid)
-        .exec((err, recipeObject) => {
-            if (!recipeObject) {
+        .exec((err, commentObject) => {
+            if (!commentObject) {
                 console.log(`receta especificado: ${req.params.recipeid} no encontrado)`);
                 return res
                     .status(404)
@@ -62,24 +59,22 @@ const commentRead = (req, res) => {
             }
             res
                 .status(200)
-                .json(recipeObject);
+                .json(commentObject);
         })
 }
 
 const commentUpdate = (req, res) => {
-    let commentid = (req.params.paramId.split("-"))[1]
-    let recipeid = (req.params.paramId.split("-"))[0]
-    if (!recipeid) {
+    if (!req.params.commentid) {
         return res
             .status(404)
             .json({
                 "message": "Ingrese un recipeid válido"
             });
     }
-    recipes
-        .findById(recipeid)
-        .exec((err, recipeObject) => {
-            if (!recipeObject) {
+    comments
+        .findById(req.params.commentid)
+        .exec((err, commentObject) => {
+            if (!commentObject) {
                 return res
                     .status(404)
                     .json({
@@ -88,14 +83,14 @@ const commentUpdate = (req, res) => {
             } else if (err) {
                 return res
                     .status(400)
-                    .json(err);
+                    .json(err); 
             }
-            recipeObject.author = req.body.author;
-            recipeObject.content = req.body.content;
-            recipeObject.score = req.body.score;
-            recipeObject.recipeReference = commentid;
+            commentObject.author = req.body.author;
+            commentObject.content = req.body.content;
+            commentObject.score = req.body.score;
+            commentObject.recipeReference = req.params.recipeid;
 
-            recipeObject.save((err, recipes) => {
+            commentObject.save((err, comment) => {
                 if (err) {
                     res
                         .status(404)
@@ -103,7 +98,7 @@ const commentUpdate = (req, res) => {
                 } else {
                     res
                         .status(200)
-                        .json(recipes);
+                        .json(comment);
                 }
             });
         });
@@ -113,8 +108,8 @@ const commentDelete = (req, res) => {
     if (req.params.commentid) {
         comments
             .findByIdAndDelete(req.params.commentid)
-            .exec((err, recipeObject) => {
-                if (!recipeObject) { // findByIdAndDelete no encontró un documento que cumpla con recipeid
+            .exec((err, commentObject) => {
+                if (!commentObject) { // findByIdAndDelete no encontró un documento que cumpla con recipeid
                     console.log(`Receta con el recipeid: ${req.params.commentid} no encontrado`);
                     return res 
                         .status(404)

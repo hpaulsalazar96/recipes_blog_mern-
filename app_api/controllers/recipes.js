@@ -182,10 +182,34 @@ const recipeDelete = (req, res) => {
     }
 }
 
+const getRecipesByFilter = (req, res) => {
+    const filter = req.params.filter
+    console.log(filter);
+    recipes
+        .find()
+        .exec((err, recipeObject) => {
+            if (!recipeObject) {
+                console.log(`recetas no encontrados)`);
+                return res
+                    .status(404)
+                    .json({ "mensaje": "recetas no encontrados" })
+            } else if (err) {
+                console.log(`usuarios tiene errores)`);
+                return res
+                    .status(404)
+                    .json(err);
+            }
+            res
+                .status(200)
+                .json(recipeObject);
+        })
+}
+
 module.exports = {
     recipeCreate,
     recipeList,
     recipeRead,
     recipeUpdate,
-    recipeDelete
+    recipeDelete,
+    getRecipesByFilter
 }

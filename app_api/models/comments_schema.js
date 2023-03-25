@@ -15,7 +15,7 @@ const commentsSchema = new mongoose.Schema({
     recipeReference : {
         type : String
     }
-})
+}) 
 
 const CommentModel = new mongoose.model('comment', commentsSchema);
 

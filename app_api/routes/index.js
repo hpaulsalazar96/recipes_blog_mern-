@@ -31,8 +31,11 @@ router
 
 router
     .route('/comments/:paramid')
-    .put(ctrlComments.commentUpdate)
     .delete(ctrlComments.commentDelete);
+
+router
+    .route('/comments/:recipeid/:commentid')
+    .put(ctrlComments.commentUpdate)
 
 router
     .route('/comments/delete/:commentid')
@@ -41,6 +44,10 @@ router
 router 
     .route('/search/:username')
     .get(ctrlUsers.userLog);
+
+router 
+    .route('/recipes/search/:filter')
+    .get(ctrlRecipes.getRecipesByFilter);
 
 module.exports = router;
 

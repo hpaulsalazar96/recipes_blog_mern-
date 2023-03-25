@@ -1,32 +1,24 @@
 // controllers de users
 const request = require('request');
 
-// Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3020' // server local
+  server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com'
 };
 
-// Listado de usuarios
-// 1. renderizar la vista users
 const renderUsers = (req, res, responseBody) => {
   res.render('users',
     {
       title: 'Página de Usuarios',
       usersObject: responseBody
-      // nombre: objetoUsuarios[0].nombre,
-      // apellido: objetoUsuarios[0].apellido,
-      // direccion: objetoUsuarios[0].direccion,
-      // carrera: objetoUsuarios[0].carrera
     });
 }
 
-// 2. peticion HTTP - GET /api/users
 const users = (req, res, next) => {
   const path = '/api/users/';
-  const requestOptions = { // objeto cargado con las opciones para request
+  const requestOptions = {
     url: `${apiOptions.server}${path}`,
     method: 'GET',
     json: {}
@@ -48,8 +40,6 @@ const users = (req, res, next) => {
     });
 }
 
-// Creación de usuarios
-// 1. renderizar la vista users_add
 const addUsers = (req, res) => {
   res.render('users_add', {
     titulo: 'Creación de Usuarios',
@@ -57,7 +47,6 @@ const addUsers = (req, res) => {
   });
 }
 
-// 2. petición HTTP - POST /api/users
 const doAddUsers = (req, res) => {
   const path = '/api/users/';
   const postdata = {
