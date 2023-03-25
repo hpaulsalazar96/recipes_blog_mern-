@@ -168,10 +168,16 @@ const renderUpdateRecipe = (req, res, responseBody) => {
 // 2. Eliminar el documento
 const doUpdateRecipe = (req, res) => {
   const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para eliminar por Id;
+  let imageName = req.body.ingredients[0]
+  if(Array.isArray(req.body.ingredients) && req.body.ingredients.length>1){
+    imageName = req.body.ingredients[0]+".jpeg"
+  }else{
+    imageName = req.body.ingredients+".jpeg"
+  }
   const postdata = {
     title: req.body.title,
     author: req.body.author,
-    img: req.body.ingredients[0],
+    img: imageName,
     relatedIssues: req.body.relatedIssues,
     description: req.body.description,
     ingredients: req.body.ingredients
