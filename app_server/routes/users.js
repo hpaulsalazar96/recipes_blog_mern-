@@ -13,16 +13,4 @@ router.get('/add', ctrlUsers.addUsers);
 /* Creación de usuarios - petición HTT POST /users */
 router.post('/add', ctrlUsers.doAddUsers);
 
-/* GET users create. */
-router.get('/create', ctrlUsers.usersCreate);
-
-/* GET users read. */
-router.get('/read', ctrlUsers.usersRead);
-
-/* GET users update. */
-router.get('/update', ctrlUsers.usersUpdate);
-
-/* GET users delete. */
-router.get('/delete', ctrlUsers.usersDelete);
-
 module.exports = router;

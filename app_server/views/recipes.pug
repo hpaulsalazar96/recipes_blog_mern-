@@ -8,15 +8,14 @@ block content
           a.btn.btn-primary.space.text-warning(role='button' text="Add" href='/recipes/add/')
   .base_page.bg-light
     .pad_mod
-      h1= title
-      p Welcome to #{title}
       hr
       h4 Listado de recetas
       hr
       - let pos=0
       each recipe in recipes
         - pos++
-        div(class="fakeimg2") #{recipe.img}
+        //div(class="fakeimg2") #{recipe.img}
+        img(src=`/images/${recipe.img}` alt=`${recipe.img}` class="img")
         a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
         p
           

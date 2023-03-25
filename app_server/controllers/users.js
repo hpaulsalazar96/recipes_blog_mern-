@@ -89,30 +89,10 @@ const doAddUsers = (req, res) => {
 
 }
 
-const usersCreate = (req, res, next) => {
-  res.send('Respuesta a la ruta /users/create');
-}
-
-const usersRead = (req, res, next) => {
-  res.send('Respuesta a la ruta /users/read');
-}
-
-const usersUpdate = (req, res, next) => {
-  res.send('Respuesta a la ruta /users/update');
-}
-
-const usersDelete = (req, res, next) => {
-  res.send('Respuesta a la ruta /users/delete');
-}
-
 module.exports = {
   // Listar usuarios
   users, // 1. peticion HTTP - GET /api/users
   // Creación de usuarios
   addUsers,   // 1. renderizar la vista users_add
   doAddUsers, // 2. petición HTTP - POST /api/users
-  usersCreate,
-  usersRead,
-  usersUpdate,
-  usersDelete
 }

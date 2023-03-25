@@ -3,11 +3,10 @@ extends layout
 block content
     .base_page.bg-light
         .pad_mod
-            div(class="fakeimg float-right") #{recipe.img}
             //h2= title
             h3 #{recipe.title}
             p Author: #{recipe.author}
-            img.rounded.float-right(src=`../../${recipe.img}` alt=`alt:${recipe.img}`)
+            img(src=`/images/${recipe.img}` class="imgr" alt=`alt:${recipe.img}`)
             
             hr
             b Related Issues:

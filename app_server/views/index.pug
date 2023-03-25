@@ -8,7 +8,8 @@ block content
       - let pos=0
       each recipe in recipesObject
         - pos++
-        div(class="fakeimg2") #{recipe.img}
+        img(src=`/images/${recipe.img}` alt=`${recipe.img}` class="img")
+        //div(class="fakeimg2") #{recipe.img}
         a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
         p
           b No.:

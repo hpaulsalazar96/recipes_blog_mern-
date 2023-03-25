@@ -53,18 +53,18 @@ block content
                         input.form-control(type='text' name="description" placeholder='Description')
                     .col-12
                       label
-                        | Ingredients
+                        | Select the principal ingredient
                         span.text-danger *
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
                         select#ingredients.form-select(name="ingredients", multiple, aria-label="multiple select issues")
                           //option(selected) Select Issues
-                          option(value="Proteina Animal") Proteina Animal
-                          option(value="Proteina Vegetal") Proteina Vegetal
-                          option(value="Carbohidratos Simples") Carbohidratos Simples
-                          option(value="Verduras") Verduras
-                          option(value="Frutas") Frutas
+                          option(value="proteina_animal") Proteina Animal
+                          option(value="proteina_vegetal") Proteina Vegetal
+                          option(value="carbohidratos") Carbohidratos
+                          option(value="verduras") Verduras
+                          option(value="frutas") Frutas
                     .col-12
                       button.btn.btn-primary.px-4.float-end.mt-4(type='submit') Save
               .col-md-5.ps-0.d-none.d-md-block
