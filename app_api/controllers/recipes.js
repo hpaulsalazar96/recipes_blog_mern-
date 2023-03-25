@@ -185,24 +185,31 @@ const recipeDelete = (req, res) => {
 const getRecipesByFilter = (req, res) => {
     const filter = req.params.filter
     console.log(filter);
+    const buscar = new RegExp(req.params.filter); // permite buscar la ocurrencia de un texto en un campo. Ej.: parte de un nombre
+    console.log (`Buscar usuario con nombre: ', ${buscar}`)
     recipes
-        .find()
-        .exec((err, recipeObject) => {
-            if (!recipeObject) {
-                console.log(`recetas no encontrados)`);
-                return res
-                    .status(404)
-                    .json({ "mensaje": "recetas no encontrados" })
-            } else if (err) {
-                console.log(`usuarios tiene errores)`);
-                return res
+        // .find({ 'nombre' : buscar }) // búsqueda por ocurrencia
+        .find({ 
+            'title' : buscar // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
+        }) // obtener todos los documentos de la coleccion que cumplen con el criterio de busqueda
+        .exec((err, recipeObject)=>{
+            if (!recipeObject || recipeObject.length == 0) { // find no encontro el documentos en la coleccion
+                console.log(`No existen documentos con nombre ${buscar}`);
+                result =[]
+                return res // respondo el mensaje en formato JSON y status HTTP 404
+                    .status(200)
+                    .json(result);
+            } else if (err) { // find encontro un error
+                console.log(`Se encontro un error en la coleccion ${users} con nombre: ${buscar}`);
+                return res // respondo el error en formato JSON y status HTTP 404
                     .status(404)
                     .json(err);
             }
-            res
+            console.log(`Se encontró el documento con nombre ${req.params.filter}`);
+            res // respondo los documentos encontrados en formato JSON y status HTTP 200
                 .status(200)
                 .json(recipeObject);
-        })
+        });
 }
 
 module.exports = {

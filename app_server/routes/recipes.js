@@ -39,6 +39,10 @@ router
 
 router
     .route('/search')
+    .post(ctrlRecipe.redirectSearch);
+
+router
+    .route('/search/:filter')
     .get(ctrlRecipe.filterRecipes);
 
 module.exports = router;

@@ -9,33 +9,6 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://recipes-blog.herokuapp.com' // server remoto - produccion
 };
 
-let comments = [
-  {
-    _id: '640b4490ce34e6871cba1ad6',
-    author: "hmendez",
-    score: 5,
-    content: "Lo que pienso...................."
-  },
-  {
-    _id: '640b4490ce34e6871cba1ad6',
-    author: "hmendez1",
-    score: 4,
-    content: "Lo que pienso...................."
-  },
-  {
-    _id: '640b4490ce34e6871cba1ad6',
-    author: "hmendez1",
-    score: 3,
-    content: "Lo que pienso...................."
-  },
-  {
-    _id: '640b4490ce34e6871cba1ad6',
-    author: "hmendez1",
-    score: 2,
-    content: "Lo que pienso...................."
-  },
-]
-
 const index = (req, res, next) => {
   const path = '/api/recipes/';
   const requestOptions = { // objeto cargado con las opciones para request
@@ -289,9 +262,8 @@ const doDeleteRecipe = (req, res) => {
 
 
 const filterRecipes = (req, res, next) => {
-  const path = `/api/recipes/search/${req.body.filter}`; // invoco a la ruta de la API para buscar por Id;
+  const path = `/api/recipes/search/${req.params.filter}`; // invoco a la ruta de la API para buscar por Id;
   console.log(path);
-  /*
   console.log(req.params.filter);
   const requestOptions = {
     url: `${apiOptions.server}${path}`,
@@ -307,6 +279,7 @@ const filterRecipes = (req, res, next) => {
       if (err) {
         console.log('Request encontró el error: ', err);
       } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+        console.log(body);
         renderFilteredRecipe(req, res, body); // llamar a la función que hace render de la vista
       } else {
         console.log('Status Code: ', response.statusCode);
@@ -314,14 +287,24 @@ const filterRecipes = (req, res, next) => {
           mensaje: 'Existe un error en la colección usuarios'
         })
       }
-    });*/
+    });
 }
 
 const renderFilteredRecipe = (req, res, responseBody) => {
-  res.render('recipe', {
-    title: 'Recipes For You', 
-    recipe: responseBody,
+  console.log("imprimir");
+  console.log(responseBody);
+  res.render('recipes', {
+    title: 'Recipes',
+    recipes: responseBody,
   });
+}
+
+const redirectSearch = (req, res) => {
+  if (req.body.filter != "") {
+    res.redirect(`/recipes/search/${req.body.filter}`);
+  }else{
+    res.redirect(`/recipes`);
+  }
 }
 
 
@@ -334,5 +317,6 @@ module.exports = {
   doUpdateRecipe,
   deleteRecipe,
   doDeleteRecipe,
-  filterRecipes
+  filterRecipes,
+  redirectSearch
 };
