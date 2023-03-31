@@ -1,12 +1,11 @@
-//controllers
-const request = require('request');
+const axios = require('axios')
+//const request = require('request');
 
-// Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3020' // server local
+  server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://recipes-blog.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://recipes-blog.herokuapp.com'
 };
 
 const index = (req, res, next) => {
@@ -26,7 +25,25 @@ const addUser = (req, res) => {
     password: req.body.password,
     superuser: req.body.superuser,
   }
+  if (req.body.password === req.body.cpassword) {
+    axios.post(`${apiOptions.server}${path}`, postdata)
+      .then(response => {
+        if (response.status === 201) {
+          // console.log('Body: ', response.data);
+          return res.redirect('/login');
+        }
 
+      })
+      .catch(error => {
+        console.log(error);
+        console.log('statuscode: ', response.statusCode);
+        console.log('error: ', error);
+        console.log('req.body: ', response.body);
+        console.log('Opciones: ', requestOptions);
+        res.render('error', { message: 'Existe un error en la creación de usuarios' });
+      });
+  }
+  /*
   const requestOptions = { // objeto cargado con las opciones para request
     url: `${apiOptions.server}${path}`,
     method: 'POST',
@@ -50,7 +67,7 @@ const addUser = (req, res) => {
       });
   } else {
     console.log("no coincide la contraseña");
-  }
+  }*/
 }
 
 module.exports = {

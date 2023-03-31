@@ -1,13 +1,11 @@
-//controllers
-// controllers de index
-const request = require('request');
+const axios = require('axios')
+//const request = require('request');
 
-// Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3020' // server local
+  server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com'
 };
 
 const index = (req, res, next) => {
@@ -25,7 +23,7 @@ const index = (req, res, next) => {
 const onAction = (req, res, next) => {
   if (req.body.action === 'update') {
     console.log('on update');
-    const path = `/api/users/${req.body.id}`; // invoco a la ruta de la API para eliminar por Id;
+    const path = `/api/users/${req.body.id}`;
     console.log(path);
     const postdata = {
       username: req.body.username,
@@ -34,6 +32,39 @@ const onAction = (req, res, next) => {
       password: req.body.password,
       superuser: req.body.superuser,
     }
+    axios.put(`${apiOptions.server}${path}`, postdata)
+      .then(response => {
+        console.log(response.data);
+        if (response.status === 200) {
+          console.log('Body: ', response.data);
+          res.render('profile', {
+            title: 'Profile',
+            message: 'Personal Information',
+            username: response.data.username,
+            email: response.data.email,
+            relatedIssues: response.data.relatedIssues,
+            id: response.data.id,
+            superuser: false
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } else if (req.body.action === 'delete') {
+    const path = `/api/users/${req.body.id}`;
+    axios.delete(`${apiOptions.server}${path}`)
+      .then(response => {
+        console.log(response.data);
+        if (response.status === 204) {
+          console.log('Objeto Resultante: ', response.data);
+          return res.redirect('/');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+/*
     const requestOptions = {
       url: `${apiOptions.server}${path}`,
       method: 'PUT',
@@ -62,8 +93,8 @@ const onAction = (req, res, next) => {
           console.log('Opciones: ', requestOptions);
           res.render('error', { message: 'Existe un error en la creación de usuarios' });
         }
-      });
-  } else if (req.body.action === 'delete') {
+      });*/
+  /*} else if (req.body.action === 'delete') {
     console.log('on delete');
     const path = `/api/users/${req.body.id}`; // invoco a la ruta de la API para eliminar por Id;
     const requestOptions = {
@@ -90,7 +121,7 @@ const onAction = (req, res, next) => {
         }
       });
   } else {
-    console.log("route not defined");
+    console.log("route not defined");*/
   }
 
 }

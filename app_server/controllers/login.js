@@ -1,12 +1,11 @@
-//controllers
-const request = require('request');
+const axios = require('axios')
+//const request = require('request');
 
-// Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3020' // server local
+  server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://recipes-blog.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://recipes-blog.herokuapp.com'
 };
 
 const index = (req, res, next) => {
@@ -17,8 +16,25 @@ const index = (req, res, next) => {
 }
 
 const getUser = (req, res, next) => {
-  const path = `/api/search/${req.body.username}`; // invoco a la ruta de la API para buscar por Id;
+  const path = `/api/search/${req.body.username}`;
   console.log(req.body.username);
+
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      if (response.data[0].password === req.body.password) {
+        return res.redirect('/');
+      } else {
+        console.log('Contraseña incorrecta');
+      }
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+/*
   const requestOptions = {
     url: `${apiOptions.server}${path}`,
     method: 'GET',
@@ -47,7 +63,7 @@ const getUser = (req, res, next) => {
         })
       }
     });
-
+*/
 }
 
 const renderMain = (req, res, responseBody) => {

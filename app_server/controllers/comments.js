@@ -1,5 +1,5 @@
-//controllers
-const request = require('request');
+const axios = require('axios')
+//const request = require('request');
 
 // Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {

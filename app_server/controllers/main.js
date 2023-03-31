@@ -1,13 +1,11 @@
-//controllers
-// controllers de index
-const request = require('request');
+const axios = require('axios')
+//const request = require('request');
 
-// Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3020' // server local
+  server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com'
 };
 
 const renderIndex = (req, res, responseBody) => {
@@ -20,6 +18,18 @@ const renderIndex = (req, res, responseBody) => {
 // peticion HTTP - GET /api/users
 const index = (req, res, next) => {
   const path = '/api/recipes/';
+
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderIndex(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  });
+/*
   const requestOptions = { // objeto cargado con las opciones para request
     url: `${apiOptions.server}${path}`,
     method: 'GET',
@@ -39,7 +49,7 @@ const index = (req, res, next) => {
           message: 'Existe un error en la colección recetas'
         });
       }
-    });
+    });*/
 }
 
 module.exports = {
