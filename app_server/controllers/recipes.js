@@ -21,7 +21,7 @@ const index = (req, res, next) => {
   .catch(error => {
     console.log(error);
     res.render('error', {
-      message: 'Existe un error en la colección recetas'
+      message: 'Existe un error en la colección comentarios'
     });
   });
 /*
@@ -77,53 +77,79 @@ const addRecipe = (req, res) => {
     description: req.body.description,
     ingredients: req.body.ingredients
   }
-
-  const requestOptions = { // objeto cargado con las opciones para request
-    url: `${apiOptions.server}${path}`,
-    method: 'POST',
-    json: postdata
-  };
-  request(requestOptions,
-    (err, response, body) => {
-      console.log('Opciones: ', requestOptions);
-      if (response.statusCode === 201) {
-        console.log('Body: ', body);
-        return res.redirect('/');
-      } else {
-        console.log('statuscode: ', response.statusCode);
-        console.log('error: ', err);
-        console.log('req.body: ', req.body);
-        console.log('Opciones: ', requestOptions);
-        res.render('error', { message: 'Existe un error en la creación de usuarios' });
-      }
-    });
+  axios.post(`${apiOptions.server}${path}`,postdata)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 201) {
+      return res.redirect('/');
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    console.log('statuscode: ', response.status);
+    console.log('error: ', error);
+    console.log('Opciones: ', requestOptions);
+    res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  });
+  // const requestOptions = { // objeto cargado con las opciones para request
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'POST',
+  //   json: postdata
+  // };
+  // request(requestOptions,
+  //   (err, response, body) => {
+  //     console.log('Opciones: ', requestOptions);
+  //     if (response.statusCode === 201) {
+  //       console.log('Body: ', body);
+  //       return res.redirect('/');
+  //     } else {
+  //       console.log('statuscode: ', response.statusCode);
+  //       console.log('error: ', err);
+  //       console.log('req.body: ', req.body);
+  //       console.log('Opciones: ', requestOptions);
+  //       res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  //     }
+  //   });
 }
 
 const getRecipe = (req, res, next) => {
-  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
+  const path = `/api/recipes/${req.params.recipeId}`;
   console.log(req.params.recipeId);
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  }
-  console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
-        renderRecipe(req, res, body); // llamar a la función que hace render de la vista
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección usuarios'
-        })
-      }
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'GET',
+  //   json: {}
+  // }
+  // console.log('Ruta: ', path);
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderRecipe(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    res.render('error', {
+      message: 'Existe un error en la colección comentarios'
     });
+  });
+  // request(
+  //   requestOptions, // Opciones
+  //   (err, response, body) => { // callback con sus 3 partes
+  //     console.log('Documento: ', body);
+  //     console.log('Status Code: ', response.statusCode);
+  //     if (err) {
+  //       console.log('Request encontró el error: ', err);
+  //     } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+  //       renderRecipe(req, res, body); // llamar a la función que hace render de la vista
+  //     } else {
+  //       console.log('Status Code: ', response.statusCode);
+  //       res.render('error', {
+  //         mensaje: 'Existe un error en la colección usuarios'
+  //       })
+  //     }
+  //   });
 }
 
 const renderRecipe = (req, res, responseBody) => {
@@ -144,29 +170,42 @@ const renderRecipe = (req, res, responseBody) => {
 
 const updateRecipe = (req, res, next) => {
   const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  }
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'GET',
+  //   json: {}
+  // }
   console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
-        console.log('Objeto Resultante: ', typeof body);
-        renderUpdateRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección usuarios'
-        })
-      }
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderUpdateRecipe(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    res.render('error', {
+      message: 'Existe un error en la colección comentarios'
     });
+  });
+  // request(
+  //   requestOptions, // Opciones
+  //   (err, response, body) => { // callback con sus 3 partes
+  //     console.log('Documento: ', body);
+  //     console.log('Status Code: ', response.statusCode);
+  //     if (err) {
+  //       console.log('Request encontró el error: ', err);
+  //     } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+  //       console.log('Objeto Resultante: ', typeof body);
+  //       renderUpdateRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
+  //     } else {
+  //       console.log('Status Code: ', response.statusCode);
+  //       res.render('error', {
+  //         mensaje: 'Existe un error en la colección usuarios'
+  //       })
+  //     }
+  //   });
 }
 
 // 0. Render de la vista users_update - Mostrar Formulario
@@ -181,7 +220,6 @@ const renderUpdateRecipe = (req, res, responseBody) => {
 // 2. Eliminar el documento
 const doUpdateRecipe = (req, res) => {
   const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para eliminar por Id;
-  let imageName = req.body.ingredients[0]
   if(Array.isArray(req.body.ingredients) && req.body.ingredients.length>1){
     imageName = req.body.ingredients[0]+".jpeg"
   }else{
@@ -195,54 +233,83 @@ const doUpdateRecipe = (req, res) => {
     description: req.body.description,
     ingredients: req.body.ingredients
   }
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'PUT',
-    json: postdata
-  }
-  console.log('Ruta: ', path);
-  request(requestOptions,
-    (err, response, body) => {
-      console.log('Opciones: ', requestOptions);
-      if (response.statusCode === 200) { // creación exitosa
-        console.log('Body: ', body);
-        // volver a mostrar la vista users_add para el ingreso de más documentos
-        return res.redirect('/'); // retorno a la página de inicio
-      } else {
-        console.log('statuscode: ', response.statusCode);
-        console.log('error: ', err);
-        console.log('req.body: ', req.body);
-        console.log('Opciones: ', requestOptions);
-        res.render('error', { message: 'Existe un error en la creación de usuarios' });
-      }
-    });
+  console.log("algo",postdata);
+  axios.put(`${apiOptions.server}${path}`,postdata)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200) {
+      return res.redirect('/');
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    console.log('statuscode: ', response.status);
+    console.log('error: ', error);
+    console.log('Opciones: ', requestOptions);
+    res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  });
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'PUT',
+  //   json: postdata
+  // }
+  // console.log('Ruta: ', path);
+  // request(requestOptions,
+  //   (err, response, body) => {
+  //     console.log('Opciones: ', requestOptions);
+  //     if (response.statusCode === 200) { // creación exitosa
+  //       console.log('Body: ', body);
+  //       // volver a mostrar la vista users_add para el ingreso de más documentos
+  //       return res.redirect('/'); // retorno a la página de inicio
+  //     } else {
+  //       console.log('statuscode: ', response.statusCode);
+  //       console.log('error: ', err);
+  //       console.log('req.body: ', req.body);
+  //       console.log('Opciones: ', requestOptions);
+  //       res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  //     }
+  //   });
 }
 
 const deleteRecipe = (req, res) => {
-  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para buscar por Id;
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  }
-  console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
-        console.log('Objeto Resultante: ', body);
-        renderDeleteRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección usuarios'
-        })
-      }
-    });
+  const path = `/api/recipes/${req.params.recipeId}`; 
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderDeleteRecipe(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    console.log('statuscode: ', response.status);
+    console.log('error: ', error);
+    console.log('Opciones: ', requestOptions);
+    res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  });
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'GET',
+  //   json: {}
+  // }
+  // console.log('Ruta: ', path);
+  // request(
+  //   requestOptions, // Opciones
+  //   (err, response, body) => { // callback con sus 3 partes
+  //     console.log('Documento: ', body);
+  //     console.log('Status Code: ', response.statusCode);
+  //     if (err) {
+  //       console.log('Request encontró el error: ', err);
+  //     } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+  //       console.log('Objeto Resultante: ', body);
+  //       renderDeleteRecipe(req, res, body); // llamar a la función que hace render de la vista users_delete
+  //     } else {
+  //       console.log('Status Code: ', response.statusCode);
+  //       res.render('error', {
+  //         mensaje: 'Existe un error en la colección usuarios'
+  //       })
+  //     }
+  //   });
 }
 
 // Eliminación de usuarios 
@@ -259,60 +326,88 @@ const renderDeleteRecipe = (req, res, responseBody) => {
 
 // 2. Eliminar el documento
 const doDeleteRecipe = (req, res) => {
-  const path = `/api/recipes/${req.params.recipeId}`; // invoco a la ruta de la API para eliminar por Id;
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'DELETE',
-    json: {}
-  }
-  console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 204) { // delete status code
-        console.log('Body: ', body);
-        return res.redirect('/'); // retorno a la página de inicio
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección recetas'
-        })
-      }
-    });
+  const path = `/api/recipes/${req.params.recipeId}`;
+  axios.delete(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 204) {
+      return res.redirect('/');
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    console.log('statuscode: ', response.status);
+    console.log('error: ', error);
+    console.log('Opciones: ', requestOptions);
+    res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  });
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'DELETE',
+  //   json: {}
+  // }
+  // console.log('Ruta: ', path);
+  // request(
+  //   requestOptions, // Opciones
+  //   (err, response, body) => { // callback con sus 3 partes
+  //     console.log('Documento: ', body);
+  //     console.log('Status Code: ', response.statusCode);
+  //     if (err) {
+  //       console.log('Request encontró el error: ', err);
+  //     } else if (response.statusCode === 204) { // delete status code
+  //       console.log('Body: ', body);
+  //       return res.redirect('/'); // retorno a la página de inicio
+  //     } else {
+  //       console.log('Status Code: ', response.statusCode);
+  //       res.render('error', {
+  //         mensaje: 'Existe un error en la colección recetas'
+  //       })
+  //     }
+  //   });
 }
 
 
 const filterRecipes = (req, res, next) => {
-  const path = `/api/recipes/search/${req.params.filter}`; // invoco a la ruta de la API para buscar por Id;
+  const path = `/api/recipes/search/${req.params.filter}`;
   console.log(path);
   console.log(req.params.filter);
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  }
-  console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
-        console.log(body);
-        renderFilteredRecipe(req, res, body); // llamar a la función que hace render de la vista
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección usuarios'
-        })
-      }
-    });
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderFilteredRecipe(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    console.log('statuscode: ', response.status);
+    console.log('error: ', error);
+    console.log('Opciones: ', requestOptions);
+    res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  });
+  // const requestOptions = {
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'GET',
+  //   json: {}
+  // }
+  // console.log('Ruta: ', path);
+  // request(
+  //   requestOptions, // Opciones
+  //   (err, response, body) => { // callback con sus 3 partes
+  //     console.log('Documento: ', body);
+  //     console.log('Status Code: ', response.statusCode);
+  //     if (err) {
+  //       console.log('Request encontró el error: ', err);
+  //     } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+  //       console.log(body);
+  //       renderFilteredRecipe(req, res, body); // llamar a la función que hace render de la vista
+  //     } else {
+  //       console.log('Status Code: ', response.statusCode);
+  //       res.render('error', {
+  //         mensaje: 'Existe un error en la colección usuarios'
+  //       })
+  //     }
+  //   });
 }
 
 const renderFilteredRecipe = (req, res, responseBody) => {

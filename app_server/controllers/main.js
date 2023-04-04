@@ -5,7 +5,7 @@ const apiOptions = {
   server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com'
+  apiOptions.server = 'https://recipes-blog.herokuapp.com'
 };
 
 const renderIndex = (req, res, responseBody) => {

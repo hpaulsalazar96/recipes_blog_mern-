@@ -5,7 +5,7 @@ const apiOptions = {
   server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com'
+  apiOptions.server = 'https://recipes-blog.herokuapp.com'
 };
 
 const renderUsers = (req, res, responseBody) => {
@@ -18,26 +18,38 @@ const renderUsers = (req, res, responseBody) => {
 
 const users = (req, res, next) => {
   const path = '/api/users/';
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  };
-
-  request(requestOptions,
-    (err, response, body) => {
-      if (err) {
-        console.log(err);
-      } else if (response.statusCode === 200) {
-        console.log('Objeto resultante: ', body);
-        renderUsers(req, res, body);
-      } else {
-        console.log(response.statusCode);
-        res.render('error', {
-          message: 'Existe un error en la colección usuarios'
-        });
-      }
+//   const requestOptions = {
+//     url: `${apiOptions.server}${path}`,
+//     method: 'GET',
+//     json: {}
+//   };
+  axios.get(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderUsers(req, res, body);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    res.render('error', {
+      message: 'Existe un error en la colección usuarios'
     });
+  });
+  // request(requestOptions,
+  //   (err, response, body) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else if (response.statusCode === 200) {
+  //       console.log('Objeto resultante: ', body);
+  //       renderUsers(req, res, body);
+  //     } else {
+  //       console.log(response.statusCode);
+  //       res.render('error', {
+  //         message: 'Existe un error en la colección usuarios'
+  //       });
+  //     }
+  //   });
 }
 
 const addUsers = (req, res) => {
@@ -61,31 +73,44 @@ const doAddUsers = (req, res) => {
     carrera: req.body.carrera,
     fecha: req.body.fecha
   }
-
-  const requestOptions = { // objeto cargado con las opciones para request
-    url: `${apiOptions.server}${path}`,
-    method: 'POST',
-    json: postdata
-  };
-
-  request(requestOptions,
-    (err, response, body) => {
-      console.log('Opciones: ', requestOptions);
-      if (response.statusCode === 201) { // creación exitosa
-        console.log('Body: ', body);
-        // volver a mostrar la vista users_add para el ingreso de más documentos
-        res.render('users_add', {
-          titulo: 'Creación de Usuarios',
-          mensaje: 'Usuario creado exitosamente'
-        });
-      } else {
-        console.log('statuscode: ', response.statusCode);
-        console.log('error: ', err);
-        console.log('req.body: ', req.body);
-        console.log('Opciones: ', requestOptions);
-        res.render('error', { message: 'Existe un error en la creación de usuarios' });
-      }
+  axios.post(`${apiOptions.server}${path}`)
+  .then(response => {
+    console.log(response.data);
+    if (response.status === 200 && response.data) {
+      renderIndex(req, res, response.data);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    res.render('error', {
+      message: 'Existe un error en la colección comentarios'
     });
+  });
+
+  // const requestOptions = { // objeto cargado con las opciones para request
+  //   url: `${apiOptions.server}${path}`,
+  //   method: 'POST',
+  //   json: postdata
+  // };
+
+  // request(requestOptions,
+  //   (err, response, body) => {
+  //     console.log('Opciones: ', requestOptions);
+  //     if (response.statusCode === 201) { // creación exitosa
+  //       console.log('Body: ', body);
+  //       // volver a mostrar la vista users_add para el ingreso de más documentos
+  //       res.render('users_add', {
+  //         titulo: 'Creación de Usuarios',
+  //         mensaje: 'Usuario creado exitosamente'
+  //       });
+  //     } else {
+  //       console.log('statuscode: ', response.statusCode);
+  //       console.log('error: ', err);
+  //       console.log('req.body: ', req.body);
+  //       console.log('Opciones: ', requestOptions);
+  //       res.render('error', { message: 'Existe un error en la creación de usuarios' });
+  //     }
+  //   });
 
 }
 
