@@ -33,10 +33,10 @@ block content
                       button.btn.btn-outline-primary(type='button', onclick='sendEmail()') Send Email
                   script.
                     function sendEmail() {
-                      var subject = document.getElementById('subject').value;
-                      var body = document.getElementById('body').value;
-                      var recipient = 'paulsalazar97@gmail.com';
-                      var mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+                      let subject = document.getElementById('subject').value;
+                      let body = document.getElementById('body').value;
+                      const recipient = 'paulsalazar97@gmail.com';
+                      let mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
                       window.location.href = mailtoLink;
                     }
               .col-md-5.ps-0.d-none.d-md-block
