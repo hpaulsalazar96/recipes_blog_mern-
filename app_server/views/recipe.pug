@@ -81,15 +81,16 @@ block content
                   td.text-center
                     form.row.g-3(action, method="post", role="form")
                       input.form-control#content(type="hidden", name="recipeReference", value=recipe._id)
-                      a.btn.btn-danger.space.text-warning(role='button' href='/recipes/comments/delete/'+recipe._id+'/'+ comment._id)
+                      a.btn.btn-danger.space(role='button' href='/recipes/comments/delete/'+recipe._id+'/'+ comment._id) Borrar Comentario
                       em.fas.fa-edit
     .base_page.bg-light
       .pad_mod
-        .col-md-6
-          label.form-label() Update Recipe ->
-          a.btn.btn-primary.space.text-warning(role='button' text="Update" href='/recipes/update/'+recipe._id)
-        .col-md-6
-          label.form-label() Delete Recipe ->
-          a.btn.btn-danger.space.text-warning(role='button' text="Update" href='/recipes/delete/'+recipe._id)
+        .col-md-12
+          label.form-label()
+          a.btn.btn-danger.px-4.float-start.mt-4.mb-4(role='button' href='/recipes/delete/'+recipe._id) Delete Recipe
+          label.form-label()
+          a.btn.btn-primary.px-4.float-end.mt-4.mb-4(role='button' href='/recipes/update/'+recipe._id) Update Recipe
+          label.form-label()
+          
 
     

@@ -1,5 +1,5 @@
 extends layout
-
+    
 block content
   .base-page.bg-light
     .container
@@ -18,9 +18,7 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-person-fill
-                        input.form-control(type='hidden' placeholder='Enter Subject')
-                        label
-                        | -> Sobre que te Gustaria Preguntar
+                        input.form-control(placeholder='Sobre que te Gustaria Preguntar' id='subject')
                     .col-12
                       label
                         | Description
@@ -28,23 +26,19 @@ block content
                       .input-group
                         .input-group-text
                           i.bi.bi-lock-fill
-                        input.form-control(type='hidden' rows="10" placeholder='Enter Description')
-                        label
-                        | -> Detalla Tus Dudas
-                    .col-12
-                      label
-                        | Email
-                        span.text-danger *
-                      .input-group
-                        .input-group-text
-                          i.bi.bi-person-fill
-                        input.form-control(type='hidden' placeholder='Enter Your Email')
-                        label
-                        | -> Deja tu correo parapoder contactarte
+                        input.form-control(rows="10" placeholder='Detalla Tus Dudas' id='body')
                     .col-12
                       //button.btn.btn-primary.px-4.float-end.mt-4(type='submit') Report
                       -const from = 'hpaulsalazar96@gmail.com'
-                      a.btn.btn-outline-primary(role="button",href=`mailto:${from}?subject=123&body=345`, target='_blank', ...) Send Email
+                      button.btn.btn-outline-primary(type='button', onclick='sendEmail()') Send Email
+                  script.
+                    function sendEmail() {
+                      var subject = document.getElementById('subject').value;
+                      var body = document.getElementById('body').value;
+                      var recipient = 'paulsalazar97@gmail.com';
+                      var mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+                      window.location.href = mailtoLink;
+                    }
               .col-md-5.ps-0.d-none.d-md-block
                 .form-right.h-100.bg-primary.text-white.text-center.pt-5
                   i.bi.bi-bootstrap
