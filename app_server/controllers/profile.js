@@ -1,5 +1,4 @@
 const axios = require('axios')
-//const request = require('request');
 
 const apiOptions = {
   server: 'http://localhost:3020'
@@ -9,6 +8,9 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 const index = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    res.redirect('/login');
+  }
   res.render('profile', {
     title: 'Profile',
     message: 'Personal Information',

@@ -1,5 +1,4 @@
 const axios = require('axios')
-//const request = require('request');
 
 const apiOptions = {
   server: 'http://localhost:3020'
@@ -38,37 +37,6 @@ const getUser = (req, res, next) => {
   .catch(error => {
     console.log(error);
   });
-
-/*
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {}
-  }
-  console.log('Ruta: ', path);
-  request(
-    requestOptions, // Opciones
-    (err, response, body) => { // callback con sus 3 partes
-      console.log('Documento: ', body);
-      console.log('Status Code: ', response.statusCode);
-      if (err) {
-        console.log('Request encontró el error: ', err);
-      } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
-        if (body[0].password === req.body.password) {
-          //console.log('Objeto Resultante: ', body.shift());
-          return res.redirect('/'); // retorno a la página de inicio
-          renderMain(req, res, body[0]); // llamar a la función que hace render de la vista users_delete
-        } else {
-          console.log('Contraseña incorrecta');
-        }
-      } else {
-        console.log('Status Code: ', response.statusCode);
-        res.render('error', {
-          mensaje: 'Existe un error en la colección usuarios'
-        })
-      }
-    });
-*/
 }
 
 const renderMain = (req, res, responseBody) => {

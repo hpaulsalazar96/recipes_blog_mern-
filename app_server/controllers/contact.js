@@ -10,11 +10,15 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 const index = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    res.redirect('/login');
+  }
   res.render('contact', {
     title: 'Contact',
     message: 'Tell Us',
     description: 'In few words what is the problem'
   });
+  
 }
 
 module.exports = {

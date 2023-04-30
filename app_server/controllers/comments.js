@@ -1,5 +1,4 @@
 const axios = require("axios");
-//const request = require('request');
 
 // Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
@@ -35,39 +34,13 @@ const addComment = (req, res) => {
         message: "Existe un error en la creación de comentarios",
       });
     });
-
-  // const requestOptions = { // objeto cargado con las opciones para request
-  //     url: `${apiOptions.server}${path}`,
-  //     method: 'POST',
-  //     json: postdata
-  // };
-  // request(requestOptions,
-  //     (err, response, body) => {
-  //         console.log('Opciones: ', requestOptions);
-  //         if (response.statusCode === 201) { // creación exitosa
-  //             console.log('Body: ', body);
-  //             // volver a mostrar la vista users_add para el ingreso de más documentos
-  //             return res.redirect(`/recipes/read/${req.params.recipeId}`);
-  //         } else {
-  //             console.log('statuscode: ', response.statusCode);
-  //             console.log('error: ', err);
-  //             console.log('req.body: ', req.body);
-  //             console.log('Opciones: ', requestOptions);
-  //             res.render('error', { message: 'Existe un error en la creación de usuarios' });
-  //         }
-  //     });
 };
 
 const deleteComment = (req, res) => {
-  const path = `/api/comments/delete/${req.params.commentId}`; // invoco a la ruta de la API para eliminar por Id;
+  const path = `/api/comments/delete/${req.params.commentId}`;
   console.log(req.params.commentId);
   console.log(path);
-  // const requestOptions = {
-  //     url: `${apiOptions.server}${path}`,
-  //     method: 'DELETE',
-  //     json: {}
-  // }
-  // console.log('Ruta: ', path);
+
   axios
     .delete(`${apiOptions.server}${path}`)
     .then((response) => {
@@ -82,24 +55,6 @@ const deleteComment = (req, res) => {
         message: "Existe un error en la colección comentarios",
       });
     });
-
-  // request(
-  //     requestOptions, // Opciones
-  //     (err, response, body) => { // callback con sus 3 partes
-  //         console.log('Documento: ', body);
-  //         console.log('Status Code: ', response.statusCode);
-  //         if (err) {
-  //             console.log('Request encontró el error: ', err);
-  //         } else if (response.statusCode === 204) { // delete status code
-  //             console.log('Objeto Resultante: ', body);
-  //             return res.redirect(`/recipes/read/${req.params.recipeId}`); // retorno a la página de inicio
-  //         } else {
-  //             console.log('Status Code: ', response.statusCode);
-  //             res.render('error', {
-  //                 mensaje: 'Existe un error en la colección usuarios'
-  //             })
-  //         }
-  //     });
 };
 
 const onAction = (req, res) => {
@@ -154,27 +109,6 @@ const onAction = (req, res) => {
             message: "Existe un error en la creación de comentarios",
           });
         });
-      // const requestOptions = {
-      //     url: `${apiOptions.server}${path}`,
-      //     method: 'PUT',
-      //     json: postdata
-      // }
-      // console.log('Ruta: ', path);
-      // request(requestOptions,
-      //     (err, response, body) => {
-      //         console.log('Opciones: ', requestOptions);
-      //         if (response.statusCode === 200) { // creación exitosa
-      //             console.log('Body: ', body);
-      //             // volver a mostrar la vista users_add para el ingreso de más documentos
-      //             return res.redirect(`/recipes/read/${req.params.recipeId}`);
-      //         } else {
-      //             console.log('statuscode: ', response.statusCode);
-      //             console.log('error: ', err);
-      //             console.log('req.body: ', req.body);
-      //             console.log('Opciones: ', requestOptions);
-      //             res.render('error', { message: 'Existe un error en la creación de usuarios' });
-      //         }
-      //     });
     }
   } else {
     console.log("New Post");
@@ -199,26 +133,6 @@ const onAction = (req, res) => {
           message: "Existe un error en la colección comentarios",
         });
       });
-    // const requestOptions = { // objeto cargado con las opciones para request
-    //     url: `${apiOptions.server}${path}`,
-    //     method: 'POST',
-    //     json: postdata
-    // };
-    // request(requestOptions,
-    //     (err, response, body) => {
-    //         console.log('Opciones: ', requestOptions);
-    //         if (response.statusCode === 201) { // creación exitosa
-    //             console.log('Body: ', body);
-    //             // volver a mostrar la vista users_add para el ingreso de más documentos
-    //             return res.redirect(`/recipes/read/${req.params.recipeId}`);
-    //         } else {
-    //             console.log('statuscode: ', response.statusCode);
-    //             console.log('error: ', err);
-    //             console.log('req.body: ', req.body);
-    //             console.log('Opciones: ', requestOptions);
-    //             res.render('error', { message: 'Existe un error en la creación de usuarios' });
-    //         }
-    //     });
   }
 };
 
