@@ -115,7 +115,7 @@ const onAction = (req, res) => {
     const path = `/api/recipes/${req.params.recipeId}`;
     console.log(path);
     const postdata = {
-      author: req.body.author,
+      author: req.session.data.username,
       content: req.body.content,
       score: req.body.score,
     };
