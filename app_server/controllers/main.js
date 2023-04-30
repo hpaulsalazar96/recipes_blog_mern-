@@ -20,15 +20,15 @@ const index = (req, res, next) => {
   const path = '/api/recipes/';
 
   axios.get(`${apiOptions.server}${path}`)
-  .then(response => {
-    console.log(response.data);
-    if (response.status === 200 && response.data) {
-      renderIndex(req, res, response.data);
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  });
+    .then(response => {
+      console.log(response.data);
+      if (response.status === 200 && response.data) {
+        renderIndex(req, res, response.data);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 module.exports = {

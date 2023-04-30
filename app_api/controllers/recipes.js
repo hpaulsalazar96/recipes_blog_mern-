@@ -186,16 +186,16 @@ const getRecipesByFilter = (req, res) => {
     const filter = req.params.filter
     console.log(filter);
     const buscar = new RegExp(req.params.filter); // permite buscar la ocurrencia de un texto en un campo. Ej.: parte de un nombre
-    console.log (`Buscar usuario con nombre: ', ${buscar}`)
+    console.log(`Buscar usuario con nombre: ', ${buscar}`)
     recipes
         // .find({ 'nombre' : buscar }) // búsqueda por ocurrencia
-        .find({ 
-            'title' : buscar // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
+        .find({
+            'title': buscar // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
         }) // obtener todos los documentos de la coleccion que cumplen con el criterio de busqueda
-        .exec((err, recipeObject)=>{
+        .exec((err, recipeObject) => {
             if (!recipeObject || recipeObject.length == 0) { // find no encontro el documentos en la coleccion
                 console.log(`No existen documentos con nombre ${buscar}`);
-                result =[]
+                result = []
                 return res // respondo el mensaje en formato JSON y status HTTP 404
                     .status(200)
                     .json(result);

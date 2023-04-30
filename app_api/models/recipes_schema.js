@@ -1,39 +1,39 @@
 const mongoose = require('mongoose');
 
-const recipesSchema= new mongoose.Schema({
-    title : {
-        type : String,
+const recipesSchema = new mongoose.Schema({
+    title: {
+        type: String,
         require: true
     },
-    author : {
-        type : String,
+    author: {
+        type: String,
         require: true
     },
     img: {
-        type : String,
+        type: String,
         require: true
     },
-    relatedIssues : {
-        type : [String],
+    relatedIssues: {
+        type: [String],
     },
-    description : {
-        type : String,
+    description: {
+        type: String,
         require: true
     },
-    ingredients : {
-        type : [String],
+    ingredients: {
+        type: [String],
     },
 })
 
 const RecipeModel = new mongoose.model('recipe', recipesSchema);
 
 const recipe = new RecipeModel({
-    title : "Fruta Repetida",
-    author : "PSV",
+    title: "Fruta Repetida",
+    author: "PSV",
     img: 'Fruta.jpg',
-    relatedIssues : ["Hipertension"],
-    description : "Instrucciones para la preparacion",
-    ingredients : ["Fruta"],
+    relatedIssues: ["Hipertension"],
+    description: "Instrucciones para la preparacion",
+    ingredients: ["Fruta"],
 })
 
 //recipe.save()

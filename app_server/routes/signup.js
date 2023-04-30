@@ -6,7 +6,7 @@ const ctrlSignup = require('../controllers/signup')
 
 /* GET signup page. */
 router
-    .route('/')    
+    .route('/')
     .get(ctrlSignup.index)
     .post(ctrlSignup.addUser);
 

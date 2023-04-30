@@ -5,37 +5,37 @@ require('./users_schema');
 require('./recipes_schema');
 require('./comments_schema');
 
-if(process.platform === 'win32'){
+if (process.platform === 'win32') {
     const rl = readLine.Interface({
         input: process.stdin,
         output: process.stdout
     });
-    rl.on('SIGINT', ()=>{
+    rl.on('SIGINT', () => {
         process.emit('SIGINT');
     });
 }
 
-const procShutdown = (msg, callback) =>{
-    mongoose.connection.close(()=>{
-        console.log('Mongoose se desconecto a traves de: ',msg);
+const procShutdown = (msg, callback) => {
+    mongoose.connection.close(() => {
+        console.log('Mongoose se desconecto a traves de: ', msg);
         callback()
     });
 }
 
-process.on('SIGUSR2', ()=>{
-    procShutdown('terminado por heroku', () =>{
+process.on('SIGUSR2', () => {
+    procShutdown('terminado por heroku', () => {
         process.kill(process.pid, 'SIGUSR2');
     })
 })
 
-process.on('SIGTERM', ()=>{
-    procShutdown('terminado por heroku', () =>{
+process.on('SIGTERM', () => {
+    procShutdown('terminado por heroku', () => {
         process.exit(0);
     })
 })
 
-process.on('SIGINT', ()=>{
-    procShutdown('terminado por windows', () =>{
+process.on('SIGINT', () => {
+    procShutdown('terminado por windows', () => {
         process.exit(0);
     })
 })
@@ -43,7 +43,7 @@ process.on('SIGINT', ()=>{
 let dbURI = 'mongodb://localhost:27017/db_recipes_project';
 mongoose.set('strictQuery', true)
 
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_URI;
 }
 
@@ -51,16 +51,16 @@ if(process.env.NODE_ENV === 'production'){
 mongoose.connect(dbURI, {
     serverSelectionTimeoutMS: 5000,
     family: 4,
-}).catch(err => console.log('Mongoose Error: ',err.reason));
+}).catch(err => console.log('Mongoose Error: ', err.reason));
 
-mongoose.connection.on('connected',()=>{
+mongoose.connection.on('connected', () => {
     console.log(`Mongoose se conecto a: ${dbURI}`);
 });
 
-mongoose.connection.on('disconnected',()=>{
+mongoose.connection.on('disconnected', () => {
     console.log(`Mongoose se desconecto de: ${dbURI}`);
 });
 
-mongoose.connection.on('error',()=>{ 
+mongoose.connection.on('error', () => {
     console.log(`Mongoose log error a: ${dbURI}`);
 });

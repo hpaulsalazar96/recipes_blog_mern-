@@ -41,11 +41,11 @@ router
     .route('/comments/delete/:commentid')
     .delete(ctrlComments.commentDelete);
 
-router 
+router
     .route('/search/:username')
     .get(ctrlUsers.userLog);
 
-router 
+router
     .route('/recipes/search/:filter')
     .get(ctrlRecipes.getRecipesByFilter);
 

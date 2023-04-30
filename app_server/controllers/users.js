@@ -18,18 +18,18 @@ const renderUsers = (req, res, responseBody) => {
 const users = (req, res, next) => {
   const path = '/api/users/';
   axios.get(`${apiOptions.server}${path}`)
-  .then(response => {
-    console.log(response.data);
-    if (response.status === 200 && response.data) {
-      renderUsers(req, res, body);
-    }
-  })
-  .catch(error => {
-    console.log(error);
-    res.render('error', {
-      message: 'Existe un error en la colección usuarios'
+    .then(response => {
+      console.log(response.data);
+      if (response.status === 200 && response.data) {
+        renderUsers(req, res, body);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.render('error', {
+        message: 'Existe un error en la colección usuarios'
+      });
     });
-  });
 }
 
 const addUsers = (req, res) => {
@@ -54,18 +54,18 @@ const doAddUsers = (req, res) => {
     fecha: req.body.fecha
   }
   axios.post(`${apiOptions.server}${path}`)
-  .then(response => {
-    console.log(response.data);
-    if (response.status === 200 && response.data) {
-      renderIndex(req, res, response.data);
-    }
-  })
-  .catch(error => {
-    console.log(error);
-    res.render('error', {
-      message: 'Existe un error en la colección comentarios'
+    .then(response => {
+      console.log(response.data);
+      if (response.status === 200 && response.data) {
+        renderIndex(req, res, response.data);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.render('error', {
+        message: 'Existe un error en la colección comentarios'
+      });
     });
-  });
 }
 
 module.exports = {

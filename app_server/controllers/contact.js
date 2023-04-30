@@ -18,7 +18,7 @@ const index = (req, res, next) => {
     message: 'Tell Us',
     description: 'In few words what is the problem'
   });
-  
+
 }
 
 module.exports = {

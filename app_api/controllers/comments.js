@@ -83,7 +83,7 @@ const commentUpdate = (req, res) => {
             } else if (err) {
                 return res
                     .status(400)
-                    .json(err); 
+                    .json(err);
             }
             commentObject.author = req.body.author;
             commentObject.content = req.body.content;
@@ -111,9 +111,9 @@ const commentDelete = (req, res) => {
             .exec((err, commentObject) => {
                 if (!commentObject) { // findByIdAndDelete no encontró un documento que cumpla con recipeid
                     console.log(`Receta con el recipeid: ${req.params.commentid} no encontrado`);
-                    return res 
+                    return res
                         .status(404)
-                        .json({"mensaje": "Receta no encontrado"});
+                        .json({ "mensaje": "Receta no encontrado" });
                 } else if (err) {
                     return res
                         .status(404)

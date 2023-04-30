@@ -54,7 +54,7 @@ const onAction = (req, res, next) => {
         console.log(error);
       });
   }
-  
+
   if (req.body.action === 'delete') {
     const path = `/api/users/${req.body.id}`;
     axios.delete(`${apiOptions.server}${path}`)
@@ -69,7 +69,7 @@ const onAction = (req, res, next) => {
         console.log(error);
       });
   }
-  
+
   if (req.body.action === 'signout') {
     req.session.destroy((err) => {
       if (err) {

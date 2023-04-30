@@ -25,13 +25,13 @@ const userCreate = (req, res) => {
 const userList = (req, res) => {
     users
         .find()
-        .exec((err, userObject)=>{
-            if(!userObject){
+        .exec((err, userObject) => {
+            if (!userObject) {
                 console.log(`usuarios no encontrados)`);
                 return res
                     .status(404)
-                    .json({"mensaje" : "usuarios no encontrados"})
-            }else if(err){
+                    .json({ "mensaje": "usuarios no encontrados" })
+            } else if (err) {
                 console.log(`usuarios tiene errores)`);
                 return res
                     .status(404)
@@ -51,21 +51,21 @@ const userList = (req, res) => {
 const userRead = (req, res) => {
     users
         .findById(req.params.userid)
-        .exec((err, userObject)=>{
-            if(!userObject){
+        .exec((err, userObject) => {
+            if (!userObject) {
                 console.log(`usuario especificado: ${req.params.userid} no encontrado)`);
                 return res
                     .status(404)
-                    .json({"mensaje" : "usuario no encontrado"})
-            }else if(err){
+                    .json({ "mensaje": "usuario no encontrado" })
+            } else if (err) {
                 console.log(`usuario especificado: ${req.params.userid} tiene errores)`);
                 return res
                     .status(404)
                     .json(err);
             }
             res
-            .status(200)
-            .json(userObject);
+                .status(200)
+                .json(userObject);
         })
 }
 
@@ -95,7 +95,7 @@ const userUpdate = (req, res) => {
             userObject.email = req.body.email;
             userObject.relatedIssues = req.body.relatedIssues;
             userObject.password = req.body.password;
-            userObject.superuser = req.body.superuser;            
+            userObject.superuser = req.body.superuser;
 
             userObject.save((err, users) => {
                 if (err) {
@@ -118,9 +118,9 @@ const userDelete = (req, res) => {
             .exec((err, userObject) => {
                 if (!userObject) { // findByIdAndDelete no encontró un documento que cumpla con userid
                     console.log(`User con el userid: ${req.params.userid} no encontrado`);
-                    return res 
+                    return res
                         .status(404)
-                        .json({"mensaje": "User no encontrado"});
+                        .json({ "mensaje": "User no encontrado" });
                 } else if (err) {
                     return res
                         .status(404)
@@ -133,15 +133,15 @@ const userDelete = (req, res) => {
     }
 }
 
-const userLog =(req, res)=> {
+const userLog = (req, res) => {
     const search = new RegExp(req.params.username); // permite buscar la ocurrencia de un texto en un campo. Ej.: parte de un nombre
-    console.log (`Buscar usuario con nombre: ', ${search}`)
+    console.log(`Buscar usuario con nombre: ', ${search}`)
     users
         // .find({ 'nombre' : buscar }) // búsqueda por ocurrencia
-        .find({ 
-            'username' : req.params.username // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
+        .find({
+            'username': req.params.username // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
         }) // obtener todos los documentos de la coleccion que cumplen con el criterio de busqueda
-        .exec((err, objetoUsuario)=>{
+        .exec((err, objetoUsuario) => {
             if (!objetoUsuario || objetoUsuario.length == 0) { // find no encontro el documentos en la coleccion
                 console.log(`No existen documentos con nombre ${search}`);
                 return res // respondo el mensaje en formato JSON y status HTTP 404
@@ -163,7 +163,7 @@ const userLog =(req, res)=> {
 }
 
 module.exports = {
-    userCreate, 
+    userCreate,
     userList,
     userRead,
     userUpdate,

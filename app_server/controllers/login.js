@@ -19,24 +19,24 @@ const getUser = (req, res, next) => {
   console.log(req.body.username);
 
   axios.get(`${apiOptions.server}${path}`)
-  .then(response => {
-    if (response.status === 200 && response.data) {
-      if (response.data[0].password === req.body.password) {
-        req.session._id = response.data[0]._id;
-        req.session.data = response.data[0];
-        req.session.isLoggedIn = true
-        req.session.save();
-        return res.redirect('/');
-      } else {
-        console.log('Contraseña incorrecta');
-        return res.redirect('/login');
-        
+    .then(response => {
+      if (response.status === 200 && response.data) {
+        if (response.data[0].password === req.body.password) {
+          req.session._id = response.data[0]._id;
+          req.session.data = response.data[0];
+          req.session.isLoggedIn = true
+          req.session.save();
+          return res.redirect('/');
+        } else {
+          console.log('Contraseña incorrecta');
+          return res.redirect('/login');
+
+        }
       }
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  });
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 const renderMain = (req, res, responseBody) => {
