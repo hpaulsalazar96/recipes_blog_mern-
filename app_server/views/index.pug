@@ -39,7 +39,8 @@ block header
             div(class="col")
             div(class="navbar-nav")
                 a(class="nav-link" href="/logout") Logout
-          form.form-inline.my-3.my-lg-0(action='/recipes/search', method='post', role='form')
+        form.form-inline.my-3.my-lg-0(action='/recipes/search', method='post', role='form')
+          div(class="collapse navbar-collapse" id="navbarNavAltMarkup", class="container")
             div(class="col")
             div(class="navbar-nav")
               input.form-control.mr-sm-2(type="text", name ="filter", placeholder="Search" aria-label="Search")
