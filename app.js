@@ -4,6 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 // modelo
 require('./app_api/models/db');
 
@@ -12,6 +17,7 @@ const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
 const signupRouter = require('./app_server/routes/signup');
 const loginRouter = require('./app_server/routes/login');
+const logoutRouter = require('./app_server/routes/logout');
 const recipeRouter = require('./app_server/routes/recipes');
 const contactRouter = require('./app_server/routes/contact');
 const profileRouter = require('./app_server/routes/profile');
@@ -29,10 +35,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'my-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  })
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/recipes', recipeRouter);
 app.use('/contact', contactRouter);
 app.use('/profile', profileRouter);

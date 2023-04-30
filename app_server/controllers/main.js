@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === 'production') {
 const renderIndex = (req, res, responseBody) => {
   res.render('index', {
     title: 'Express-On Trending',
-    recipesObject: responseBody
+    recipesObject: responseBody,
+    isLoggedIn: req.session.isLoggedIn
   });
 }
 
