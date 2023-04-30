@@ -21,7 +21,6 @@ const index = (req, res, next) => {
 
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderIndex(req, res, response.data);
       }

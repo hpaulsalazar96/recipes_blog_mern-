@@ -17,7 +17,6 @@ if (process.platform === 'win32') {
 
 const procShutdown = (msg, callback) => {
     mongoose.connection.close(() => {
-        console.log('Mongoose se desconecto a traves de: ', msg);
         callback()
     });
 }

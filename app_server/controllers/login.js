@@ -16,7 +16,6 @@ const index = (req, res, next) => {
 
 const getUser = (req, res, next) => {
   const path = `/api/search/${req.body.username}`;
-  console.log(req.body.username);
 
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
@@ -28,7 +27,6 @@ const getUser = (req, res, next) => {
           req.session.save();
           return res.redirect('/');
         } else {
-          console.log('Contraseña incorrecta');
           return res.redirect('/login');
 
         }
@@ -40,7 +38,6 @@ const getUser = (req, res, next) => {
 }
 
 const renderMain = (req, res, responseBody) => {
-  console.log(`response`, responseBody);
   res.render('profile', {
     title: 'Profile',
     message: 'Personal Information',

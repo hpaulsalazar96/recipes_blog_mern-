@@ -16,13 +16,11 @@ const index = (req, res, next) => {
 
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderIndex(req, res, response.data);
       }
     })
     .catch(error => {
-      console.log(error);
       res.render('error', {
         message: 'Existe un error en la colección comentarios'
       });
@@ -32,7 +30,8 @@ const index = (req, res, next) => {
 const renderIndex = (req, res, responseBody) => {
   res.render('recipes', {
     title: 'Recipes',
-    recipes: responseBody
+    recipes: responseBody,
+    superuser: req.session.data.superuser,
   });
 }
 
@@ -40,6 +39,10 @@ const recipeCreate = (req, res, next) => {
 
   if (!req.session.isLoggedIn) {
     res.redirect('/login');
+  }
+
+  if (!req.session.data.superuser) {
+    res.redirect('/recipes');
   }
 
   res.render('recipes_add', {
@@ -66,13 +69,11 @@ const addRecipe = (req, res) => {
   }
   axios.post(`${apiOptions.server}${path}`, postdata)
     .then(response => {
-      console.log(response.data);
       if (response.status === 201) {
         return res.redirect('/');
       }
     })
     .catch(error => {
-      console.log(error);
       console.log('statuscode: ', response.status);
       console.log('error: ', error);
       console.log('Opciones: ', requestOptions);
@@ -87,16 +88,13 @@ const getRecipe = (req, res, next) => {
   }
 
   const path = `/api/recipes/${req.params.recipeId}`;
-  console.log(req.params.recipeId);
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderRecipe(req, res, response.data);
       }
     })
     .catch(error => {
-      console.log(error);
       res.render('error', {
         message: 'Existe un error en la colección comentarios'
       });
@@ -107,6 +105,7 @@ const renderRecipe = (req, res, responseBody) => {
   res.render('recipe', {
     title: 'Recipes For You',
     recipe: responseBody,
+    superuser: req.session.data.superuser,
   });
 }
 
@@ -116,17 +115,18 @@ const updateRecipe = (req, res, next) => {
     res.redirect('/login');
   }
 
+  if (!req.session.data.superuser) {
+    res.redirect('/recipes');
+  }
+
   const path = `/api/recipes/${req.params.recipeId}`;
-  console.log('Ruta: ', path);
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderUpdateRecipe(req, res, response.data);
       }
     })
     .catch(error => {
-      console.log(error);
       res.render('error', {
         message: 'Existe un error en la colección comentarios'
       });
@@ -158,16 +158,13 @@ const doUpdateRecipe = (req, res) => {
     description: req.body.description,
     ingredients: req.body.ingredients
   }
-  console.log("algo", postdata);
   axios.put(`${apiOptions.server}${path}`, postdata)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200) {
         return res.redirect('/');
       }
     })
     .catch(error => {
-      console.log(error);
       console.log('statuscode: ', response.status);
       console.log('error: ', error);
       console.log('Opciones: ', requestOptions);
@@ -176,16 +173,23 @@ const doUpdateRecipe = (req, res) => {
 }
 
 const deleteRecipe = (req, res) => {
+
+  if (!req.session.isLoggedIn) {
+    res.redirect('/login');
+  }
+
+  if (!req.session.data.superuser) {
+    res.redirect('/recipes');
+  }
+
   const path = `/api/recipes/${req.params.recipeId}`;
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderDeleteRecipe(req, res, response.data);
       }
     })
     .catch(error => {
-      console.log(error);
       console.log('statuscode: ', response.status);
       console.log('error: ', error);
       console.log('Opciones: ', requestOptions);
@@ -210,13 +214,11 @@ const doDeleteRecipe = (req, res) => {
   const path = `/api/recipes/${req.params.recipeId}`;
   axios.delete(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 204) {
         return res.redirect('/');
       }
     })
     .catch(error => {
-      console.log(error);
       console.log('statuscode: ', response.status);
       console.log('error: ', error);
       console.log('Opciones: ', requestOptions);
@@ -232,17 +234,13 @@ const filterRecipes = (req, res, next) => {
   }
 
   const path = `/api/recipes/search/${req.params.filter}`;
-  console.log(path);
-  console.log(req.params.filter);
   axios.get(`${apiOptions.server}${path}`)
     .then(response => {
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         renderFilteredRecipe(req, res, response.data);
       }
     })
     .catch(error => {
-      console.log(error);
       console.log('statuscode: ', response.status);
       console.log('error: ', error);
       console.log('Opciones: ', requestOptions);
@@ -251,8 +249,6 @@ const filterRecipes = (req, res, next) => {
 }
 
 const renderFilteredRecipe = (req, res, responseBody) => {
-  console.log("imprimir");
-  console.log(responseBody);
   res.render('recipes', {
     title: 'Recipes',
     recipes: responseBody,

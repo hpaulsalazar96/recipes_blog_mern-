@@ -28,13 +28,11 @@ const addUser = (req, res) => {
     axios.post(`${apiOptions.server}${path}`, postdata)
       .then(response => {
         if (response.status === 201) {
-          // console.log('Body: ', response.data);
           return res.redirect('/login');
         }
 
       })
       .catch(error => {
-        console.log(error);
         console.log('statuscode: ', response.statusCode);
         console.log('error: ', error);
         console.log('req.body: ', response.body);

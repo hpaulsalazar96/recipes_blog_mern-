@@ -24,9 +24,7 @@ const index = (req, res, next) => {
 
 const onAction = (req, res, next) => {
   if (req.body.action === 'update') {
-    console.log('on update');
     const path = `/api/users/${req.body.id}`;
-    console.log(path);
     const postdata = {
       username: req.body.username,
       email: req.body.email,
@@ -36,9 +34,7 @@ const onAction = (req, res, next) => {
     }
     axios.put(`${apiOptions.server}${path}`, postdata)
       .then(response => {
-        console.log(response.data);
         if (response.status === 200) {
-          console.log('Body: ', response.data);
           res.render('profile', {
             title: 'Profile',
             message: 'Personal Information',
@@ -59,9 +55,7 @@ const onAction = (req, res, next) => {
     const path = `/api/users/${req.body.id}`;
     axios.delete(`${apiOptions.server}${path}`)
       .then(response => {
-        console.log(response.data);
         if (response.status === 204) {
-          console.log('Objeto Resultante: ', response.data);
           return res.redirect('/');
         }
       })

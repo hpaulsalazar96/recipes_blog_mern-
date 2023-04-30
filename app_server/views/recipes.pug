@@ -1,11 +1,12 @@
 extends layout
 
 block content
-  .base_page.bg-light
-      .pad_mod
-        .col-md-6
-          label.form-label()
-          a.btn.btn-primary.space(role='button' href='/recipes/add/') Add Recipe
+  if superuser
+    .base_page.bg-light
+        .pad_mod
+          .col-md-6
+            label.form-label()
+            a.btn.btn-primary.space(role='button' href='/recipes/add/') Add Recipe
   .base_page.bg-light
     .pad_mod
       hr
