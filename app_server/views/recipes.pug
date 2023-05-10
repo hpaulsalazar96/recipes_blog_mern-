@@ -1,41 +1,41 @@
 extends layout
-
+   
 block content
   if superuser
-    .base_page.bg-light
+    .base_page
         .pad_mod
-          .col-md-6
-            label.form-label()
             a.btn.btn-primary.space(role='button' href='/recipes/add/') Add Recipe
-  .base_page.bg-light
-    .pad_mod
-      hr
-      h4 Listado de recetas
-      hr
+  .base_page
+    .pad_mod 
+      h1  Listado de recetas
+      p 
       - let pos=0
-      each recipe in recipes
-        - pos++
-        //div(class="fakeimg2") #{recipe.img}
-        img(src=`/images/${recipe.img}` alt=`${recipe.img}` class="img")
-        a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
-        p
+        each recipe in recipes
+          .card 
+            .card-conten 
+              - pos++
+              .card-img 
+                //div(class="fakeimg2") #{recipe.img}
+                img(src=`/images/${recipe.img}` alt=`${recipe.img}` class="img")
+              .card-text   
+                p
           
-          b No.:
-          | #{pos}
-        p
-          b Titulo
-          |  #{recipe.title}
-        b Related Issues
-        each issue in recipe.relatedIssues
+                  b No.:
+                  | #{pos}
+                p
+                  b Titulo: 
+                  |  #{recipe.title}
+                p 
+                b Principal Ingredient 
+                each ingredient in recipe.ingredients
+                  p
+                    | &dot;  #{ingredient}
+                  p
+                p  
+            b Related Issues
+              each issue in recipe.relatedIssues
+                p
+                  | &dot;  #{issue} 
+                p     
+              a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
           p
-              | &dot;  #{issue} 
-          p
-        b Principal Ingredient 
-        each ingredient in recipe.ingredients
-          p
-              | &dot;  #{ingredient}
-          p
-        hr
-        hr
-        hr
-      hr

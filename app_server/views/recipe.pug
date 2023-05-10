@@ -1,8 +1,11 @@
 extends layout
 
 block content
-    .base_page.bg-light
+
+    .base_page
+      .cardbig
         .pad_mod
+          .card
             //h2= title
             h3 #{recipe.title}
             p Author: #{recipe.author}
@@ -33,10 +36,6 @@ block content
             p #{over_score.toFixed(2)}/5
             hr
 
-    .base_page.bg-light
-      .pad_mod
-        .row.g-3.bg-light
-          .col-md-14
             .card
               .card-body
                 form.row.g-3(action, method="post", role="form")
@@ -48,47 +47,56 @@ block content
                     label.form-label(for="content") Describe your comment
                     input.form-control#content(type="text", name="content", placeholder="Input Comment")
                   .col-md-2
-                    label.form-label(for="score") Select from 0 to 5 points ->
-                    input.form-control#score(type="range",min="0", max="5", name="score")
+                    label.form-label(for="score") How was it?
+                    div.emoji-selector
+                      input(type="radio", id="score-5", name="score", value="5")
+                      label(for="score-5") 😍
+                      input(type="radio", id="score-4", name="score", value="4")
+                      label(for="score-4") 😊
+                      input(type="radio", id="score-3", name="score", value="3")
+                      label(for="score-3") 😐
+                      input(type="radio", id="score-2", name="score", value="2")
+                      label(for="score-2") 😕
+                      input(type="radio", id="score-1", name="score", value="1")
+                      label(for="score-1") 😞
                   .col-md-1
                     .vertical-center
-                      button.btn.btn-outline-primary(type="submit") Post New...
+                    button.btn.btn-outline-primary(type="submit") Post New...
 
     
-    .base_page.bg-light
-      .pad_mod
-        h3.text-left Comments Section
-        table.table.table-hover.table-light.table-responsive.bg-secondary.table-striped
-          caption
-          thead.thead-light.fixed
-            tr
-              th.text-center(scope="col") #
-              th.text-center(scope="col") Content
-              th.text-center(scope="col") Author
-              th.text-center(scope="col") Score
-              th.text-center(scope='col') Delete
-            tbody
-              - var pos=1
-              each comment in recipe.comments
-                tr
-                  td.text-center.numComment=pos++
-                  td.text-center #{comment.content}
-                  td.text-center #{comment.author}
-                  td.text-center #{comment.score}
-                  td.text-center
-                    form.row.g-3(action, method="post", role="form")
-                      input.form-control#content(type="hidden", name="recipeReference", value=recipe._id)
-                      a.btn.btn-danger.space(role='button' href='/recipes/comments/delete/'+recipe._id+'/'+ comment._id) Borrar Comentario
-                      em.fas.fa-edit
-    if superuser
-      .base_page.bg-light
-        .pad_mod
-          .col-md-12
-            label.form-label()
-            a.btn.btn-danger.px-4.float-start.mt-4.mb-4(role='button' href='/recipes/delete/'+recipe._id) Delete Recipe
-            label.form-label()
-            a.btn.btn-primary.px-4.float-end.mt-4.mb-4(role='button' href='/recipes/update/'+recipe._id) Update Recipe
-            label.form-label()
+        .card
+          h3.text-left Comments Section
+          table.table.table-hover.table-light.table-responsive.bg-secondary.table-striped
+            caption
+            thead.fixed
+              tr
+                th.text-center(scope="col") #
+                th.text-center(scope="col") Content
+                th.text-center(scope="col") Author
+                th.text-center(scope="col") Score
+                th.text-center(scope='col') Delete
+              tbody
+                - var pos=1
+                each comment in recipe.comments
+                  tr
+                    td.text-center.numComment=pos++
+                    td.text-center #{comment.content}
+                    td.text-center #{comment.author}
+                    td.text-center #{comment.score}
+                    td.text-center
+                      form.row.g-3(action, method="post", role="form")
+                        input.form-control#content(type="hidden", name="recipeReference", value=recipe._id)
+                        a.btn.btn-danger.space(role='button' href='/recipes/comments/delete/'+recipe._id+'/'+ comment._id) Borrar Comentario
+                        em.fas.fa-edit
+        if superuser
+        .base_page
+          .pad_mod
+            .col-md-12
+              label.form-label()
+              a.btn.btn-danger.px-4.float-start.mt-4.mb-4(role='button' href='/recipes/delete/'+recipe._id) Delete Recipe
+              label.form-label()
+              a.btn.btn-primary.px-4.float-end.mt-4.mb-4(role='button' href='/recipes/update/'+recipe._id) Update Recipe
+              label.form-label()
           
 
     
