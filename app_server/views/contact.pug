@@ -13,7 +13,7 @@ block content
                   form.row.g-4(action='')
                     .col-12
                       label
-                        | Subject
+                        | Asunto
                         span.text-danger *
                       .input-group
                         .input-group-text
@@ -21,7 +21,7 @@ block content
                         input.form-control(placeholder='Sobre que te Gustaria Preguntar' id='subject')
                     .col-12
                       label
-                        | Description
+                        | Detalle
                         span.text-danger *
                       .input-group
                         .input-group-text
@@ -30,7 +30,7 @@ block content
                     .col-12
                       //button.btn.btn-primary.px-4.float-end.mt-4(type='submit') Report
                       -const from = 'hpaulsalazar96@gmail.com'
-                      button.btn.btn-outline-primary(type='button', onclick='sendEmail()') Send Email
+                      button.btn.btn-outline-primary(type='button', onclick='sendEmail()') Enviar Email
                   script.
                     function sendEmail() {
                       let subject = document.getElementById('subject').value;
@@ -45,4 +45,4 @@ block content
                   h2.fs-1 #{message}
                   br
                   p #{description}
-          p.text-end.text-secondary.mt-3 A Henry and Ignacio Project
+          p.text-end.text-secondary.mt-3 Un proyecto de Henry Salazar y Sebastian Bustillos

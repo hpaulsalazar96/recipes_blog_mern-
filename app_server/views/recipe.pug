@@ -8,23 +8,23 @@ block content
           .card
             //h2= title
             h3 #{recipe.title}
-            p Author: #{recipe.author}
+            p Autor: #{recipe.author}
             img(src=`/images/${recipe.img}` class="imgr" alt=`alt:${recipe.img}`)
             
             hr
-            b Related Issues:
+            b Problemas Relacionados:
             each issue in recipe.relatedIssues
                 p
                 | &dot;  #{issue}
                 p
             hr
-            b Ingredients:
+            b Ingredientes:
             each item in recipe.ingredients
                 p
                 | &dot;  #{item}
                 p
             hr
-            b Instructions:
+            b Instrucciones:
             p #{recipe.description}
             hr
             - var over_score=0
@@ -32,7 +32,7 @@ block content
               - over_score = over_score + comment.score
             - over_score = over_score/recipe.comments.length
             hr
-            b Overall Score:
+            b Puntaje:
             p #{over_score.toFixed(2)}/5
             hr
 
@@ -44,10 +44,10 @@ block content
                   .col-md-6
                       input.form-control#recipeReference(type="hidden", name="recipeReference", value=recipe._id)
                   .col-md-9
-                    label.form-label(for="content") Describe your comment
+                    label.form-label(for="content") Que piensas de la receta
                     input.form-control#content(type="text", name="content", placeholder="Input Comment")
                   .col-md-2
-                    label.form-label(for="score") How was it?
+                    label.form-label(for="score") Como estuvo?
                     div.emoji-selector
                       input(type="radio", id="score-5", name="score", value="5")
                       label(for="score-5") 😍
@@ -65,16 +65,16 @@ block content
 
     
         .card
-          h3.text-left Comments Section
+          h3.text-left Sección de Comentarios
           table.table.table-hover.table-light.table-responsive.bg-secondary.table-striped
             caption
             thead.fixed
               tr
                 th.text-center(scope="col") #
-                th.text-center(scope="col") Content
-                th.text-center(scope="col") Author
-                th.text-center(scope="col") Score
-                th.text-center(scope='col') Delete
+                th.text-center(scope="col") Reseña
+                th.text-center(scope="col") Autor
+                th.text-center(scope="col") Puntaje
+                th.text-center(scope='col') Eliminar
               tbody
                 - var pos=1
                 each comment in recipe.comments
@@ -93,9 +93,9 @@ block content
           .pad_mod
             .col-md-12
               label.form-label()
-              a.btn.btn-danger.px-4.float-start.mt-4.mb-4(role='button' href='/recipes/delete/'+recipe._id) Delete Recipe
+              a.btn.btn-danger.px-4.float-start.mt-4.mb-4(role='button' href='/recipes/delete/'+recipe._id) Eliminar Receta
               label.form-label()
-              a.btn.btn-primary.px-4.float-end.mt-4.mb-4(role='button' href='/recipes/update/'+recipe._id) Update Recipe
+              a.btn.btn-primary.px-4.float-end.mt-4.mb-4(role='button' href='/recipes/update/'+recipe._id) Actualizar Receta
               label.form-label()
           
 

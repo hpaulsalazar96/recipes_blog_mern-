@@ -29,7 +29,7 @@ const index = (req, res, next) => {
 
 const renderIndex = (req, res, responseBody) => {
   res.render('recipes', {
-    title: 'Recipes',
+    title: 'Recetas',
     recipes: responseBody,
     superuser: req.session.data.superuser,
   });
@@ -47,7 +47,7 @@ const recipeCreate = (req, res, next) => {
 
   res.render('recipes_add', {
     title: 'Recipes',
-    message: 'Healthy Meal On Comming!!!'
+    message: 'Comida saludable en camino!!!'
   });
 }
 
@@ -103,7 +103,7 @@ const getRecipe = (req, res, next) => {
 
 const renderRecipe = (req, res, responseBody) => {
   res.render('recipe', {
-    title: 'Recipes For You',
+    title: 'Recetas para ti',
     recipe: responseBody,
     superuser: req.session.data.superuser,
   });
@@ -137,7 +137,7 @@ const updateRecipe = (req, res, next) => {
 const renderUpdateRecipe = (req, res, responseBody) => {
   res.render('recipes_update', {
     title: 'Update Recipe',
-    message: 'Update Your Recipe',
+    message: 'Actualiza la Receta',
     recipe: responseBody
   });
 }
@@ -203,7 +203,7 @@ const deleteRecipe = (req, res) => {
 const renderDeleteRecipe = (req, res, responseBody) => {
   res.render('recipes_delete', {
     title: 'Delete Recipe',
-    message: 'Delete this Recipe',
+    message: 'Elimina esta receta',
     recipe: responseBody
   });
 }

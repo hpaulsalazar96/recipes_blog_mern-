@@ -33,7 +33,7 @@ block header
           if !isLoggedIn
             div(class="col")
             div(class="navbar-nav")
-                a(class="nav-link" href="/signup") SignUp
+                a(class="nav-link" href="/signup") Resgistrarse
         form.form-inline.my-3.my-lg-0(action='/recipes/search', method='post', role='form')
           div(class="collapse navbar-collapse" id="navbarNavAltMarkup", class="container")
             div(class="col")
@@ -67,13 +67,10 @@ block content
               .input-group.mb-3
                 .input-group-prepend
                 input.form-control(type="password", name="password", placeholder="Enter Password", style="font-family: 'Open Sans', sans-serif; color: #fff; background-color: transparent; border-color: #fff;")
-            .form-check.mb-4
-              input#inlineFormCheck.form-check-input(type="checkbox")
-              label.form-check-label(for="inlineFormCheck", style="font-family: 'Open Sans', sans-serif; font-weight: 600; color: #fff;") Remember me
-            button.btn.btn-primary.btn-block.px-4(type="submit", style="background-color: light-blue; border-color: blue; font-family: 'Open Sans', sans-serif; font-weight: 600;") Login
+            button.btn.btn-primary.btn-block.px-4(type="submit", style="background-color: light-blue; border-color: blue; font-family: 'Open Sans', sans-serif; font-weight: 600;") Ingresar
         .col-md-5.ps-0.d-none.d-md-block
           .form-right.h-100
-        p.text-end.text-secondary.mt-3(style="font-family: 'Open Sans', sans-serif;") A Henry and Ignacio Project
+        p.text-end.text-secondary.mt-3(style="font-family: 'Open Sans', sans-serif;") Un proyecto de Henry Salazar y Sebastian Bustillos
 
 
 footer

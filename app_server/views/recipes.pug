@@ -4,7 +4,7 @@ block content
   if superuser
     .base_page
         .pad_mod
-            a.btn.btn-primary.space(role='button' href='http://localhost:3021/recipes/add') Add Recipe
+            a.btn.btn-primary.space(role='button' href='http://localhost:3021/recipes/add') Añadir Receta
   .base_page
     .pad_mod 
       h1  Listado de recetas
@@ -26,16 +26,16 @@ block content
                   b Titulo: 
                   |  #{recipe.title}
                 p 
-                b Principal Ingredient 
+                b Ingrediente Principal
                 each ingredient in recipe.ingredients
                   p
                     | &dot;  #{ingredient}
                   p
                 p  
-            b Related Issues
+            b Problemas Relacionados
               each issue in recipe.relatedIssues
                 p
                   | &dot;  #{issue} 
                 p     
-              a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) View
+              a.btn.btn-primary.px-4.float-end.mt-4(role='button' href='/recipes/read/'+recipe._id) Ver Mas
           p

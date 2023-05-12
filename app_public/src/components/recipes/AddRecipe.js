@@ -154,7 +154,9 @@ const AddRecipe = () => {
                             <div className="p-5 mb-5 h-100 bg-primary text-light d-flex align-items-center" style={divStyle}>
                                 <h1>Comida Saludable en Camino</h1>
                             </div>
+                            Un proyecto de Henry Salazar y Sebastian Bustillos
                         </div>
+                        
                     </div>
                 </div>
             </div>

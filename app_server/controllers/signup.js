@@ -9,8 +9,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const index = (req, res, next) => {
   res.render('signup', {
-    title: 'SignUp',
-    message: 'Hi, starting well'
+    title: 'Registrarse',
+    message: 'Empecemos'
   });
 }
 

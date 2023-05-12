@@ -14,9 +14,9 @@ const index = (req, res, next) => {
     res.redirect('/login');
   }
   res.render('contact', {
-    title: 'Contact',
-    message: 'Tell Us',
-    description: 'In few words what is the problem'
+    title: 'Contacto',
+    message: 'Cuentanos',
+    description: 'En pocas palabras detalla tus dudas'
   });
 
 }
