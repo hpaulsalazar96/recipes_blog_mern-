@@ -1,5 +1,5 @@
-import logo from './../../logo.svg';
 import './add.css';
+import axios from 'axios';
 
 import React, { useState } from 'react';
 
@@ -12,10 +12,17 @@ const AddRecipe = () => {
         ingredients: [],
     });
 
+    const apiOptions = {
+        server: 'http://localhost:3020'
+    };
+    if (process.env.NODE_ENV === 'production') {
+        apiOptions.server = 'https://recipes-blog.herokuapp.com'
+    };
+
     const divStyle = {
         minWidth: '200px',
         minHeight: '650px',
-      };
+    };
 
     const handleChange = (e) => {
         const { name, options, multiple } = e.target;
@@ -28,14 +35,29 @@ const AddRecipe = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-        setFormData({
-            title: '',
-            author: '',
-            description: '',
-            issues: [],
-            ingredients: [],
-        });
+        const path = '/api/recipes/';
+        let imageName = formData.ingredients[0]
+        if (Array.isArray(req.body.ingredients) && req.body.ingredients.length > 1) {
+            imageName = formData.ingredients[0] + ".jpeg"
+        } else {
+            imageName = formData.ingredients + ".jpeg"
+        }
+        postdata = ({formData, img: imageName});
+        axios
+            .post(`${apiOptions.server}${path}`, postdata)
+            .then((response) => {
+                console.log('Form data submitted successfully:', response.data);
+                setFormData({
+                    title: '',
+                    author: '',
+                    description: '',
+                    issues: [],
+                    ingredients: [],
+                });
+            })
+            .catch((error) => {
+                console.error('Error submitting form data:', error);
+            });
     };
 
     return (
@@ -123,7 +145,7 @@ const AddRecipe = () => {
                         </div>
                         <div className="col-md-4 m-auto ">
                             <div className="p-5 mb-5 h-100 bg-primary text-light d-flex align-items-center" style={divStyle}>
-                            <h1>Comida Saludable en Camino</h1>
+                                <h1>Comida Saludable en Camino</h1>
                             </div>
                         </div>
                     </div>
