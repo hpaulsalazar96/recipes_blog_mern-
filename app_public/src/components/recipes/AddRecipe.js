@@ -8,11 +8,11 @@ const AddRecipe = () => {
         title: '',
         author: '',
         description: '',
-        issues: [],
+        relatedIssues: [],
         ingredients: [],
     });
 
-    const apiOptions = {
+    let apiOptions = {
         server: 'http://localhost:3020'
     };
     if (process.env.NODE_ENV === 'production') {
@@ -26,12 +26,18 @@ const AddRecipe = () => {
 
     const handleChange = (e) => {
         const { name, options, multiple } = e.target;
-        const selectedValues = Array.from(options)
+    
+        let selectedValues = [];
+        if (multiple) {
+          selectedValues = Array.from(options)
             .filter((option) => option.selected)
             .map((option) => option.value);
-
-        setFormData({ ...formData, [name]: multiple ? selectedValues : e.target.value });
-    };
+        } else {
+          selectedValues = e.target.value;
+        }
+    
+        setFormData({ ...formData, [name]: selectedValues });
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,7 +48,8 @@ const AddRecipe = () => {
         } else {
             imageName = formData.ingredients + ".jpeg"
         }
-        let postdata = ({formData, img: imageName});
+        let postdata = ({...formData, img: imageName});
+        console.log(postdata);
         axios
             .post(`${apiOptions.server}${path}`, postdata)
             .then((response) => {
@@ -51,7 +58,7 @@ const AddRecipe = () => {
                     title: '',
                     author: '',
                     description: '',
-                    issues: [],
+                    relatedIssues: [],
                     ingredients: [],
                 });
             })
@@ -103,13 +110,13 @@ const AddRecipe = () => {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="issues">Problemas Relacionados:</label>
+                                    <label htmlFor="relatedIssues">Problemas Relacionados:</label>
                                     <select
                                         className="form-control"
-                                        id="issues"
-                                        name="issues"
+                                        id="relatedIssues"
+                                        name="relatedIssues"
                                         multiple
-                                        value={formData.issues}
+                                        value={formData.relatedIssues}
                                         onChange={handleChange}
                                     >
                                         <option value="Diabetes">Diabetes</option>

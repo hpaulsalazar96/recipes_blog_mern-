@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const apiOptions = {
+let apiOptions = {
   server: 'http://localhost:3020'
 };
 if (process.env.NODE_ENV === 'production') {
