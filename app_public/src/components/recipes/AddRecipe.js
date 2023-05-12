@@ -37,12 +37,12 @@ const AddRecipe = () => {
         e.preventDefault();
         const path = '/api/recipes/';
         let imageName = formData.ingredients[0]
-        if (Array.isArray(req.body.ingredients) && req.body.ingredients.length > 1) {
+        if (Array.isArray(formData.ingredients) && formData.ingredients.length > 1) {
             imageName = formData.ingredients[0] + ".jpeg"
         } else {
             imageName = formData.ingredients + ".jpeg"
         }
-        postdata = ({formData, img: imageName});
+        let postdata = ({formData, img: imageName});
         axios
             .post(`${apiOptions.server}${path}`, postdata)
             .then((response) => {
